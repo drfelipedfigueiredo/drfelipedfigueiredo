@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dr. Felipe Dias Figueiredo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #F8F7F5, #EAE6DF);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Marca d’água ULTRA CLEAN */
+body::before {
+  content: "";
+  position: absolute;
+  width: 65%;
+  height: 85%;
+  background: url('folha_transparente.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.035;
+  transform: rotate(-8deg);
+  right: -8%;
+  top: 5%;
+}
+
+/* Container */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 20px;
+  padding: 35px 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  color: #4F5B4A;
+  font-size: 26px;
+  margin: 0;
+}
+
+.divider {
+  width: 50px;
+  height: 2px;
+  background: #C2A46D;
+  margin: 12px auto 20px;
+}
+
+.handle {
+  font-size: 14px;
+  color: #C2A46D;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+.bio {
+  font-size: 14px;
+  color: #4F5B4A;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+/* Botões */
+.button {
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.primary {
+  background: #4F5B4A;
+  color: white;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.secondary {
+  border: 1px solid #C2A46D;
+  color: #4F5B4A;
+}
+
+.secondary:hover {
+  background: #C2A46D;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Dr. Felipe Dias Figueiredo</h1>
+  <div class="divider"></div>
+
+  <div class="handle">@drfelipedfigueiredo</div>
+
+  <div class="bio">
+    Médico | CRM 189357<br>
+    🧒 Crianças e adultos<br>
+    🚑 Experiência em emergência<br>
+    🎓 Pós-graduação | Einstein<br>
+    🩺 Atendimento direto e criterioso<br>
+    👶 Membro da Sociedade Brasileira de Pediatria
+  </div>
+
+  <a class="button primary" href="https://wa.me/551297465150" target="_blank">
+    📱 Agendar pelo WhatsApp
+  </a>
+
+  <a class="button secondary" href="https://instagram.com/drfelipedfigueiredo" target="_blank">
+    📷 Instagram
+  </a>
+
+  <a class="button secondary" 
+     href="https://www.google.com/maps/search/?api=1&query=Rua+Dom+Bosco,+35,+Centro,+Sala+A8,+Cruzeiro,+SP" 
+     target="_blank">
+    📍 Como chegar
+  </a>
+
+</div>
