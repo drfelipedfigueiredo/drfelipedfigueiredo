@@ -1,16 +1,14 @@
-## Hi there 👋
+# Dr. Felipe Dias Figueiredo
 
-<!--
-**drfelipedfigueiredo/drfelipedfigueiredo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Landing page profissional para direcionamento de pacientes.
 
-Here are some ideas to get you started:
+## 📱 Contato
+- WhatsApp: https://wa.me/551297465150
+- Instagram: https://instagram.com/drfelipedfigueiredo
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 📍 Endereço
+Rua Dom Bosco, 35 – Centro – Sala A8  
+Cruzeiro – SP
+
+## 🚀 Publicação
+Hospedado via GitHub Pages.
