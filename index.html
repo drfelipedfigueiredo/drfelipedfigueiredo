@@ -8,6 +8,15 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
+<!-- 🔍 Google Analytics (substituir ID depois) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <style>
 body {
   margin: 0;
@@ -16,7 +25,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px 0;
 }
 
 /* Marca d’água */
@@ -64,7 +74,6 @@ h1 {
   font-size: 14px;
   color: #C2A46D;
   margin-bottom: 18px;
-  letter-spacing: 0.5px;
 }
 
 .bio {
@@ -89,11 +98,6 @@ h1 {
   color: white;
 }
 
-.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
 .secondary {
   border: 1px solid #C2A46D;
   color: #4F5B4A;
@@ -104,13 +108,11 @@ h1 {
   color: white;
 }
 
-/* Endereço no mesmo tom do texto médico */
 .footer-address {
   margin-top: 18px;
   font-size: 13px;
   color: #4F5B4A;
   line-height: 1.5;
-  letter-spacing: 0.3px;
 }
 </style>
 </head>
@@ -122,7 +124,7 @@ h1 {
   <h1>Dr. Felipe Dias Figueiredo</h1>
   <div class="divider"></div>
 
-  <div class="handle">@drfelipedfigueiredo</div>
+  <div class="handle">@felipedfigueiredo</div>
 
   <div class="bio">
     Médico | CRM 189357<br>
@@ -133,11 +135,13 @@ h1 {
     🩺 Atendimento direto e criterioso
   </div>
 
-  <a class="button primary" href="https://wa.me/551297465150" target="_blank">
+  <a class="button primary" 
+     href="https://wa.me/551297465150?text=Olá,%20gostaria%20de%20agendar%20consulta" 
+     target="_blank">
     📱 Agendar pelo WhatsApp
   </a>
 
-  <a class="button secondary" href="https://instagram.com/drfelipedfigueiredo" target="_blank">
+  <a class="button secondary" href="https://instagram.com/felipedfigueiredo" target="_blank">
     📷 Instagram
   </a>
 
@@ -148,7 +152,9 @@ h1 {
   </a>
 
   <div class="footer-address">
-    📍 Rua Dom Bosco, 35 – Centro – Sala A8 – Pátio Mantiqueira – Cruzeiro/SP
+    📍 Rua Dom Bosco, 35 – Centro<br>
+    Sala A8 – Pátio Mantiqueira<br>
+    Cruzeiro/SP
   </div>
 
 </div>
