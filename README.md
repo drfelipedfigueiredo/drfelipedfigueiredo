@@ -7,8 +7,5 @@ Landing page profissional para direcionamento de pacientes.
 - Instagram: https://instagram.com/drfelipedfigueiredo
 
 ## 📍 Endereço
-Rua Dom Bosco, 35 – Centro – Sala A8  
+Rua Dom Bosco, 35 – Centro – Sala A8 – Pátio Mantiqueira –
 Cruzeiro – SP
-
-## 🚀 Publicação
-Hospedado via GitHub Pages.
