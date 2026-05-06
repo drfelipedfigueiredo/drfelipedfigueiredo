@@ -73,13 +73,26 @@ margin-top:10px;
 
 .result{
 margin-top:20px;
-background:#fff;
-padding:20px;
-border-radius:12px;
 }
 
-.main{font-size:20px;color:var(--dour);}
-.small{font-size:13px;color:#555;}
+.card{
+background:#fff;
+border-radius:12px;
+padding:18px;
+margin-bottom:12px;
+border-left:4px solid var(--dour);
+}
+
+.card-title{
+color:var(--verde);
+font-weight:500;
+margin-bottom:6px;
+}
+
+.card-dose{
+font-size:22px;
+color:var(--dour);
+}
 
 .alert{
 margin-top:15px;
@@ -117,16 +130,6 @@ max-width:500px;
 border-radius:12px;
 font-size:13px;
 }
-
-.log{
-margin-top:20px;
-font-size:12px;
-background:#fff;
-padding:10px;
-border-radius:10px;
-max-height:150px;
-overflow:auto;
-}
 </style>
 </head>
 
@@ -139,20 +142,10 @@ Ferramenta em validação clínica — uso orientado.
 <!-- TERMO -->
 <div class="modal" id="modal">
 <div class="modal-content">
-
 <strong>Termo de Uso</strong><br><br>
-
-Ferramenta informativa, não substitui consulta médica.<br><br>
-
-Uso restrito a pacientes previamente avaliados.<br><br>
-
-<label>
-<input type="checkbox" id="check">
- Li e concordo com os termos
-</label>
-
+Ferramenta informativa. Não substitui avaliação médica.<br><br>
+<label><input type="checkbox" id="check"> Li e concordo</label>
 <button onclick="aceitar()">Continuar</button>
-
 </div>
 </div>
 
@@ -176,8 +169,6 @@ Uso restrito a pacientes previamente avaliados.<br><br>
 <option value="ibuprofeno">Ibuprofeno</option>
 <option value="hedera">Hedera helix</option>
 <option value="desloratadina">Desloratadina</option>
-<option value="loratadina">Loratadina</option>
-<option value="cetirizina">Cetirizina</option>
 <option value="simeticona">Simeticona</option>
 </select>
 
@@ -185,15 +176,11 @@ Uso restrito a pacientes previamente avaliados.<br><br>
 
 <div class="result" id="res"></div>
 
-<button onclick="copiar()">Copiar para WhatsApp</button>
-
 <div class="alert">
 <strong>Sinais de alerta:</strong><br>
-Febre > 72h, prostração, vômitos, dispneia ou <br>
+Febre > 72h, prostração, vômitos persistentes, dispneia ou <br>
 menores de 3 meses com febre → atendimento imediato.
 </div>
-
-<div class="log" id="log"></div>
 
 <div class="footer">
 
@@ -203,14 +190,7 @@ Rua Dom Bosco, 35 – Centro<br>
 Sala A8 – Pátio Mantiqueira<br>
 Cruzeiro/SP<br><br>
 
-<hr>
-
-<strong>Aviso Legal</strong><br><br>
-
-Ferramenta informativa e educativa.<br><br>
-Não substitui avaliação médica.<br><br>
-Uso apenas com orientação do médico assistente.<br><br>
-Em caso de piora ou emergência, procurar atendimento imediato.
+Ferramenta informativa. Não substitui avaliação médica.
 
 </div>
 
@@ -233,16 +213,6 @@ document.getElementById("modal").style.display="none";
 document.getElementById("app").classList.remove("hidden");
 }
 
-let texto="";
-
-/* LOG */
-function salvarLog(t){
-let l=JSON.parse(localStorage.getItem("log")||"[]");
-l.unshift(new Date().toLocaleString()+" - "+t);
-localStorage.setItem("log",JSON.stringify(l.slice(0,20)));
-document.getElementById("log").innerHTML=l.join("<br>");
-}
-
 /* CALC */
 function calc(){
 
@@ -252,75 +222,105 @@ let tipo=document.getElementById("tipoIdade").value;
 let med=document.getElementById("med").value;
 let res=document.getElementById("res");
 
-if(!peso||!med){res.innerHTML="Preencha dados";return;}
+if(!peso || !med){
+res.innerHTML="Preencha os dados.";
+return;
+}
 
-let idadeAnos=tipo==="meses"?idade/12:idade;
+let idadeAnos = tipo==="meses"?idade/12:idade;
+let html="";
 
 /* DIPIRONA */
 if(med=="dipirona"){
 if(peso<5){res.innerHTML="Contraindicado";return;}
-let d=peso*12.5;
-texto=`Dipirona ${d.toFixed(0)}mg`;
-res.innerHTML=`Dipirona<br>${d.toFixed(0)} mg<br>500mg/mL: ${(d/25).toFixed(0)} gotas<br>50mg/mL: ${(d/50).toFixed(1)} mL`;
+let dose=Math.min(peso*12.5,1000);
+
+html+=`
+<div class="card">
+<div class="card-title">Dipirona 500 mg/mL</div>
+<div class="card-dose">${(dose/25).toFixed(0)} gotas</div>
+</div>
+
+<div class="card">
+<div class="card-title">Dipirona 50 mg/mL</div>
+<div class="card-dose">${(dose/50).toFixed(1)} mL</div>
+</div>
+`;
 }
 
 /* PARACETAMOL */
 if(med=="paracetamol"){
-let d=peso*15;
-texto=`Paracetamol ${d.toFixed(0)}mg`;
-res.innerHTML=`Paracetamol<br>${d.toFixed(0)} mg<br>32mg/mL: ${(d/32).toFixed(1)} mL<br>200mg/mL: ${(d/200).toFixed(2)} mL`;
+let dose=Math.min(peso*15,750);
+
+html+=`
+<div class="card">
+<div class="card-title">Paracetamol 32 mg/mL</div>
+<div class="card-dose">${(dose/32).toFixed(1)} mL</div>
+</div>
+
+<div class="card">
+<div class="card-title">Paracetamol 200 mg/mL</div>
+<div class="card-dose">${(dose/200).toFixed(2)} mL</div>
+</div>
+`;
 }
 
 /* IBUPROFENO */
 if(med=="ibuprofeno"){
 if(idadeAnos<0.5){res.innerHTML="Não usar <6 meses";return;}
-let d=peso*10;
-texto=`Ibuprofeno ${d.toFixed(0)}mg`;
-res.innerHTML=`Ibuprofeno<br>${d.toFixed(0)} mg<br>100mg/mL: ${(d/100).toFixed(2)} mL<br>200mg/mL: ${(d/200).toFixed(2)} mL`;
+let dose=Math.min(peso*10,300);
+
+html+=`
+<div class="card">
+<div class="card-title">Ibuprofeno 100 mg/mL</div>
+<div class="card-dose">${(dose/100).toFixed(2)} mL</div>
+</div>
+
+<div class="card">
+<div class="card-title">Ibuprofeno 200 mg/mL</div>
+<div class="card-dose">${(dose/200).toFixed(2)} mL</div>
+</div>
+`;
 }
 
 /* HEDERA */
 if(med=="hedera"){
 let d=idadeAnos<6?"2 mL":idadeAnos<12?"4 mL":"6 mL";
-texto=`Hedera ${d}`;
-res.innerHTML=`Hedera helix<br>${d}`;
+
+html+=`
+<div class="card">
+<div class="card-title">Hedera helix 15 mg/mL</div>
+<div class="card-dose">${d}</div>
+</div>
+`;
 }
 
 /* DESLORATADINA */
 if(med=="desloratadina"){
 let d=idadeAnos<6?"2,5 mL":idadeAnos<12?"2,5 mg":"5 mg";
-texto=`Desloratadina ${d}`;
-res.innerHTML=`Desloratadina<br>${d}`;
-}
 
-/* LORATADINA */
-if(med=="loratadina"){
-let d=idadeAnos<6?"5 mg":"10 mg";
-texto=`Loratadina ${d}`;
-res.innerHTML=`Loratadina<br>${d}`;
-}
-
-/* CETIRIZINA */
-if(med=="cetirizina"){
-let d=idadeAnos<6?"5 mg":"10 mg";
-texto=`Cetirizina ${d}`;
-res.innerHTML=`Cetirizina<br>${d}`;
+html+=`
+<div class="card">
+<div class="card-title">Desloratadina</div>
+<div class="card-dose">${d}</div>
+</div>
+`;
 }
 
 /* SIMETICONA */
 if(med=="simeticona"){
 let g=Math.min(peso,20);
-texto=`Simeticona ${g} gotas`;
-res.innerHTML=`Simeticona<br>${g} gotas`;
+
+html+=`
+<div class="card">
+<div class="card-title">Simeticona</div>
+<div class="card-dose">${g} gotas</div>
+</div>
+`;
 }
 
-salvarLog(texto);
-}
+res.innerHTML=html;
 
-/* COPIAR */
-function copiar(){
-navigator.clipboard.writeText(texto);
-alert("Copiado");
 }
 
 </script>
