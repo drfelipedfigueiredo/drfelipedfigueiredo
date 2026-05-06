@@ -22,24 +22,10 @@ background:var(--off);
 font-family:Montserrat;
 }
 
-.hidden{display:none;}
-
-.top{
-position:fixed;
-top:0;
-width:100%;
-background:var(--verde);
-color:#fff;
-text-align:center;
-padding:10px;
-font-size:12px;
-z-index:9999;
-}
-
 .container{
 max-width:640px;
 margin:auto;
-padding:80px 20px 30px;
+padding:60px 20px;
 }
 
 h1{
@@ -69,10 +55,11 @@ color:#fff;
 border:none;
 border-radius:10px;
 margin-top:10px;
+font-size:15px;
 }
 
-.result{
-margin-top:20px;
+.whatsapp{
+background:#25D366;
 }
 
 .card{
@@ -86,70 +73,36 @@ border-left:4px solid var(--dour);
 .card-title{
 color:var(--verde);
 font-weight:500;
-margin-bottom:6px;
 }
 
 .card-dose{
 font-size:22px;
 color:var(--dour);
+margin-top:5px;
 }
 
 .alert{
-margin-top:15px;
+margin-top:20px;
 background:#fff4f4;
 padding:15px;
 border-radius:10px;
 color:var(--alert);
 font-size:13px;
+line-height:1.6;
 }
 
-.footer{
-margin-top:25px;
+.legal{
+margin-top:20px;
 font-size:12px;
-text-align:center;
 color:#666;
-}
-
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000000cc;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:99999;
-}
-
-.modal-content{
-background:#fff;
-padding:20px;
-max-width:500px;
-border-radius:12px;
-font-size:13px;
+text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div class="top">
-Ferramenta em validação clínica — uso orientado.
-</div>
-
-<!-- TERMO -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<strong>Termo de Uso</strong><br><br>
-Ferramenta informativa. Não substitui avaliação médica.<br><br>
-<label><input type="checkbox" id="check"> Li e concordo</label>
-<button onclick="aceitar()">Continuar</button>
-</div>
-</div>
-
-<div class="container hidden" id="app">
+<div class="container">
 
 <h1>Guia Infantil</h1>
 
@@ -174,15 +127,41 @@ Ferramenta informativa. Não substitui avaliação médica.<br><br>
 
 <button onclick="calc()">Calcular</button>
 
-<div class="result" id="res"></div>
+<div id="res"></div>
 
+<!-- BOTÃO WHATSAPP -->
+  <script>
+
+function abrirWhatsApp(){
+const mensagem = encodeURIComponent(
+`Olá, gostaria de agendar uma consulta com o Dr. Felipe.
+
+Paciente: 
+Idade: 
+
+Preferência de dia/horário:`
+);
+
+window.open(`https://wa.me/5512997465150?text=${mensagem}`, "_blank");
+}
+
+</script>
+
+  
+
+<!-- ALERTAS -->
 <div class="alert">
 <strong>Sinais de alerta:</strong><br>
-Febre > 72h, prostração, vômitos persistentes, dispneia ou <br>
-menores de 3 meses com febre → atendimento imediato.
+• Febre por mais de 72 horas<br>
+• Recusa alimentar<br>
+• Sonolência excessiva ou irritabilidade<br>
+• Vômitos persistentes<br>
+• Dificuldade respiratória<br>
+• Crianças menores de 3 meses com febre
 </div>
 
-<div class="footer">
+<!-- AVISO LEGAL -->
+<div class="legal">
 
 <strong>Dr. Felipe Dias Figueiredo</strong><br>
 Médico | CRM 189357<br>
@@ -190,28 +169,21 @@ Rua Dom Bosco, 35 – Centro<br>
 Sala A8 – Pátio Mantiqueira<br>
 Cruzeiro/SP<br><br>
 
-Ferramenta informativa. Não substitui avaliação médica.
+<hr>
+
+<strong>Aviso Legal</strong><br><br>
+
+Ferramenta informativa e educativa.<br><br>
+Não substitui avaliação médica.<br><br>
+Uso apenas sob orientação do médico assistente.<br><br>
+A equivalência em gotas pode variar conforme o fabricante.<br><br>
+Em caso de piora ou emergência, procure atendimento imediato.
 
 </div>
 
 </div>
 
 <script>
-
-function aceitar(){
-if(!document.getElementById("check").checked){
-alert("Aceite necessário");
-return;
-}
-localStorage.setItem("aceite","ok");
-document.getElementById("modal").style.display="none";
-document.getElementById("app").classList.remove("hidden");
-}
-
-if(localStorage.getItem("aceite")){
-document.getElementById("modal").style.display="none";
-document.getElementById("app").classList.remove("hidden");
-}
 
 /* CALC */
 function calc(){
@@ -259,8 +231,8 @@ html+=`
 </div>
 
 <div class="card">
-<div class="card-title">Paracetamol 200 mg/mL</div>
-<div class="card-dose">${(dose/200).toFixed(2)} mL</div>
+<div class="card-title">Paracetamol 200 mg/mL (gotas)</div>
+<div class="card-dose">${(dose/10).toFixed(0)} gotas</div>
 </div>
 `;
 }
@@ -272,13 +244,13 @@ let dose=Math.min(peso*10,300);
 
 html+=`
 <div class="card">
-<div class="card-title">Ibuprofeno 100 mg/mL</div>
-<div class="card-dose">${(dose/100).toFixed(2)} mL</div>
+<div class="card-title">Ibuprofeno 100 mg/mL (gotas)</div>
+<div class="card-dose">${(dose/5).toFixed(0)} gotas</div>
 </div>
 
 <div class="card">
-<div class="card-title">Ibuprofeno 200 mg/mL</div>
-<div class="card-dose">${(dose/200).toFixed(2)} mL</div>
+<div class="card-title">Ibuprofeno 200 mg/mL (gotas)</div>
+<div class="card-dose">${(dose/10).toFixed(0)} gotas</div>
 </div>
 `;
 }
@@ -321,6 +293,11 @@ html+=`
 
 res.innerHTML=html;
 
+}
+
+/* WHATSAPP */
+function abrirWhatsApp(){
+window.open("https://wa.me/55SEUNUMERO", "_blank");
 }
 
 </script>
