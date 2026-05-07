@@ -14,24 +14,42 @@
 --off:#F8F7F5;
 --dour:#C2A46D;
 --alert:#A33;
+--azul:#EEF5FF;
+--azulb:#C9DCF7;
+--cinza:#666;
+--whatsapp:#25D366;
+}
+
+*{
+box-sizing:border-box;
 }
 
 body{
 margin:0;
-background:var(--off);
-font-family:Montserrat;
+background:linear-gradient(180deg,#F8F7F5,#EAE6DF);
+font-family:Montserrat,sans-serif;
+color:#333;
 }
 
 .container{
 max-width:640px;
 margin:auto;
-padding:60px 20px;
+padding:50px 20px;
 }
 
 h1{
-font-family:Playfair Display;
+font-family:'Playfair Display',serif;
 text-align:center;
 color:var(--verde);
+font-weight:500;
+margin-bottom:6px;
+}
+
+.subtitle{
+text-align:center;
+font-size:13px;
+color:#777;
+margin-bottom:28px;
 }
 
 .row{
@@ -41,61 +59,135 @@ margin-bottom:15px;
 }
 
 input,select{
-flex:1;
+width:100%;
 padding:14px;
 border-radius:10px;
 border:1px solid #ddd;
+font-family:Montserrat,sans-serif;
+font-size:14px;
+background:#fff;
 }
 
 button{
 width:100%;
 padding:14px;
-background:var(--verde);
-color:#fff;
-border:none;
+background:#fff;
+color:var(--verde);
+border:1.5px solid var(--dour);
 border-radius:10px;
 margin-top:10px;
 font-size:15px;
+font-family:Montserrat,sans-serif;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.92;
 }
 
 .whatsapp{
-background:#25D366;
+background:var(--verde);
+color:#fff;
+border:none;
+margin-top:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+.whatsapp svg{
+width:18px;
+height:18px;
+fill:#fff;
 }
 
 .card{
 background:#fff;
-border-radius:12px;
+border-radius:14px;
 padding:18px;
 margin-bottom:12px;
 border-left:4px solid var(--dour);
+box-shadow:0 4px 14px rgba(0,0,0,.04);
 }
 
 .card-title{
 color:var(--verde);
 font-weight:500;
+font-size:15px;
+margin-bottom:4px;
 }
 
 .card-dose{
-font-size:22px;
+font-size:24px;
 color:var(--dour);
 margin-top:5px;
+font-weight:500;
+}
+
+.card-small{
+font-size:12px;
+color:#666;
+line-height:1.5;
+margin-top:6px;
+}
+
+.info{
+background:#fff;
+border-radius:14px;
+padding:16px;
+margin:16px 0;
+font-size:13px;
+line-height:1.6;
+color:#555;
+border-left:4px solid var(--verde);
 }
 
 .alert{
-margin-top:20px;
-background:#fff4f4;
-padding:15px;
-border-radius:10px;
+margin-top:22px;
+background:#FFF4F4;
+padding:16px;
+border-radius:12px;
 color:var(--alert);
 font-size:13px;
-line-height:1.6;
+line-height:1.7;
+text-align:left;
 }
 
-.legal{
-margin-top:20px;
-font-size:12px;
-color:#666;
+.legal-box{
+margin-top:18px;
+background:var(--azul);
+padding:16px;
+border-radius:12px;
+border-left:4px solid var(--azulb);
+font-size:13px;
+line-height:1.7;
+color:#345;
+text-align:left;
+}
+
+.footer{
+margin-top:28px;
 text-align:center;
+font-size:12px;
+line-height:1.7;
+color:#666;
+}
+
+.error{
+background:#fff4f4;
+border-radius:10px;
+padding:14px;
+color:var(--alert);
+font-size:14px;
+margin-top:15px;
+line-height:1.5;
+}
+
+@media(max-width:520px){
+.row{
+flex-direction:column;
+}
 }
 </style>
 </head>
@@ -106,17 +198,31 @@ text-align:center;
 
 <h1>Guia Infantil</h1>
 
+<div class="subtitle">
+Calculadora educativa de doses pediátricas
+</div>
+
 <div class="row">
-<input type="number" id="peso" placeholder="Peso (kg)">
-<input type="number" id="idade" placeholder="Idade">
+
+<input type="number"
+id="peso"
+placeholder="Peso (kg)"
+step="0.1">
+
+<input type="number"
+id="idade"
+placeholder="Idade"
+step="1">
+
 <select id="tipoIdade">
 <option value="anos">anos</option>
 <option value="meses">meses</option>
 </select>
+
 </div>
 
 <select id="med">
-<option value="">Selecione</option>
+<option value="">Selecione o medicamento</option>
 <option value="dipirona">Dipirona</option>
 <option value="paracetamol">Paracetamol</option>
 <option value="ibuprofeno">Ibuprofeno</option>
@@ -125,59 +231,52 @@ text-align:center;
 <option value="simeticona">Simeticona</option>
 </select>
 
-<button onclick="calc()">Calcular</button>
+<button onclick="calc()">
+Calcular
+</button>
 
 <div id="res"></div>
 
-<!-- BOTÃO WHATSAPP -->
-  <script>
+<button class="whatsapp"
+onclick="abrirWhatsApp()">
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M16.04 3C8.86 3 3.02 8.84 3.02 16.02c0 2.3.6 4.54 1.74 6.52L3 29l6.62-1.73a12.94 12.94 0 0 0 6.42 1.68h.01c7.18 0 13.02-5.84 13.02-13.02C29.07 8.84 23.23 3 16.04 3zm0 23.72h-.01a10.8 10.8 0 0 1-5.5-1.5l-.4-.24-3.92 1.03 1.05-3.82-.26-.39a10.76 10.76 0 0 1-1.66-5.78c0-5.95 4.85-10.8 10.81-10.8 2.89 0 5.6 1.12 7.64 3.16a10.73 10.73 0 0 1 3.16 7.64c0 5.95-4.85 10.8-10.81 10.8zm5.92-8.08c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.52-.16-.74.16-.22.32-.85 1.05-1.04 1.27-.19.22-.38.24-.7.08-.32-.16-1.36-.5-2.6-1.6-.96-.86-1.61-1.92-1.8-2.24-.19-.32-.02-.49.14-.65.14-.14.32-.38.48-.57.16-.19.22-.32.32-.54.11-.22.05-.4-.03-.57-.08-.16-.74-1.79-1.02-2.45-.27-.65-.54-.56-.74-.57h-.63c-.22 0-.57.08-.87.4-.3.32-1.14 1.11-1.14 2.7s1.17 3.14 1.33 3.35c.16.22 2.3 3.51 5.57 4.92.78.34 1.39.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.9-.78 2.17-1.54.27-.76.27-1.41.19-1.54-.08-.13-.3-.21-.62-.37z"/>
+</svg>
+Agendar consulta pelo WhatsApp
+</button>
 
-function abrirWhatsApp(){
-const mensagem = encodeURIComponent(
-`Olá, gostaria de agendar uma consulta com o Dr. Felipe.
-
-Paciente: 
-Idade: 
-
-Preferência de dia/horário:`
-);
-
-window.open(`https://wa.me/5512997465150?text=${mensagem}`, "_blank");
-}
-
-</script>
-
-  
-
-<!-- ALERTAS -->
 <div class="alert">
+
 <strong>Sinais de alerta:</strong><br>
+
 • Febre por mais de 72 horas<br>
 • Recusa alimentar<br>
 • Sonolência excessiva ou irritabilidade<br>
 • Vômitos persistentes<br>
 • Dificuldade respiratória<br>
 • Crianças menores de 3 meses com febre
+
 </div>
 
-<!-- AVISO LEGAL -->
-<div class="legal">
+<div class="legal-box">
+
+<strong>Aviso Legal</strong><br>
+
+Ferramenta informativa e educativa.<br>
+Não substitui avaliação médica.<br>
+Uso apenas sob orientação do médico assistente.<br>
+A equivalência em gotas pode variar conforme o fabricante.<br>
+Em caso de piora ou emergência, procure atendimento imediato.
+
+</div>
+
+<div class="footer">
 
 <strong>Dr. Felipe Dias Figueiredo</strong><br>
 Médico | CRM 189357<br>
 Rua Dom Bosco, 35 – Centro<br>
 Sala A8 – Pátio Mantiqueira<br>
-Cruzeiro/SP<br><br>
-
-<hr>
-
-<strong>Aviso Legal</strong><br><br>
-
-Ferramenta informativa e educativa.<br><br>
-Não substitui avaliação médica.<br><br>
-Uso apenas sob orientação do médico assistente.<br><br>
-A equivalência em gotas pode variar conforme o fabricante.<br><br>
-Em caso de piora ou emergência, procure atendimento imediato.
+Cruzeiro/SP
 
 </div>
 
@@ -185,109 +284,410 @@ Em caso de piora ou emergência, procure atendimento imediato.
 
 <script>
 
-/* CALC */
+function arredondar(valor,casas=1){
+return Number(valor)
+.toFixed(casas)
+.replace(".",",");
+}
+
+function erro(msg){
+
+document.getElementById("res").innerHTML=
+`<div class="error">${msg}</div>`;
+
+}
+
 function calc(){
 
-let peso=parseFloat(document.getElementById("peso").value);
-let idade=parseFloat(document.getElementById("idade").value);
+let peso=parseFloat(
+document.getElementById("peso").value
+);
+
+let idade=parseFloat(
+document.getElementById("idade").value
+);
+
 let tipo=document.getElementById("tipoIdade").value;
+
 let med=document.getElementById("med").value;
+
 let res=document.getElementById("res");
 
-if(!peso || !med){
-res.innerHTML="Preencha os dados.";
+if(!peso || peso<=0){
+erro("Informe o peso da criança.");
 return;
 }
 
-let idadeAnos = tipo==="meses"?idade/12:idade;
+if(!med){
+erro("Selecione o medicamento.");
+return;
+}
+
+let idadeAnos=
+idade?(tipo==="meses"?idade/12:idade):null;
+
+let idadeMeses=
+idade?(tipo==="anos"?idade*12:idade):null;
+
 let html="";
 
 /* DIPIRONA */
-if(med=="dipirona"){
-if(peso<5){res.innerHTML="Contraindicado";return;}
-let dose=Math.min(peso*12.5,1000);
+
+if(med==="dipirona"){
+
+if(idadeMeses!==null && idadeMeses<3){
+erro("Dipirona: uso pediátrico apenas acima de 3 meses.");
+return;
+}
+
+if(peso<5){
+erro("Dipirona: abaixo de 5 kg, não utilizar sem avaliação médica.");
+return;
+}
+
+let doseMin=peso*10;
+let doseMax=peso*15;
+
+let maxDia;
+
+if(peso>=5 && peso<=8) maxDia=500;
+else if(peso>=9 && peso<=15) maxDia=1000;
+else if(peso>=16 && peso<=23) maxDia=1500;
+else if(peso>=24 && peso<=30) maxDia=2000;
+else if(peso>=31 && peso<=45) maxDia=3000;
+else if(peso>=46 && peso<=53) maxDia=3500;
+else maxDia=5000;
+
+let tetoDose=maxDia/4;
+
+doseMin=Math.min(doseMin,tetoDose);
+doseMax=Math.min(doseMax,tetoDose);
+
+let gotasMin=doseMin/25;
+let gotasMax=doseMax/25;
+
+let mlMin=doseMin/50;
+let mlMax=doseMax/50;
 
 html+=`
-<div class="card">
-<div class="card-title">Dipirona 500 mg/mL</div>
-<div class="card-dose">${(dose/25).toFixed(0)} gotas</div>
+
+<div class="info">
+<strong>Dipirona</strong><br>
+Dose VO pediátrica:
+10 a 15 mg/kg/dose até 4x/dia.
 </div>
 
 <div class="card">
-<div class="card-title">Dipirona 50 mg/mL</div>
-<div class="card-dose">${(dose/50).toFixed(1)} mL</div>
+<div class="card-title">
+Dipirona 500 mg/mL — gotas
 </div>
+
+<div class="card-dose">
+${Math.round(gotasMin)} a ${Math.round(gotasMax)} gotas
+</div>
+
+<div class="card-small">
+500 mg/mL = 20 gotas/mL |
+1 gota = 25 mg
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Dipirona 50 mg/mL — solução oral
+</div>
+
+<div class="card-dose">
+${arredondar(mlMin)} a ${arredondar(mlMax)} mL
+</div>
+
+<div class="card-small">
+Dose calculada:
+${Math.round(doseMin)} a ${Math.round(doseMax)} mg
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Limite máximo diário
+</div>
+
+<div class="card-dose">
+${maxDia} mg/dia
+</div>
+</div>
+
 `;
 }
 
 /* PARACETAMOL */
-if(med=="paracetamol"){
-let dose=Math.min(peso*15,750);
+
+if(med==="paracetamol"){
+
+let doseMin=peso*10;
+let doseMax=peso*15;
+
+let maxDia=peso*75;
+
+let tetoDose=
+Math.min(750,maxDia/4);
+
+doseMin=Math.min(doseMin,tetoDose);
+doseMax=Math.min(doseMax,tetoDose);
+
+let mlSuspMin=doseMin/32;
+let mlSuspMax=doseMax/32;
+
+let gotasMin=doseMin/13.33;
+let gotasMax=doseMax/13.33;
 
 html+=`
-<div class="card">
-<div class="card-title">Paracetamol 32 mg/mL</div>
-<div class="card-dose">${(dose/32).toFixed(1)} mL</div>
+
+<div class="info">
+<strong>Paracetamol</strong><br>
+Dose VO pediátrica:
+10 a 15 mg/kg/dose a cada 4-6h.
 </div>
 
 <div class="card">
-<div class="card-title">Paracetamol 200 mg/mL (gotas)</div>
-<div class="card-dose">${(dose/10).toFixed(0)} gotas</div>
+<div class="card-title">
+Paracetamol 32 mg/mL — suspensão
 </div>
+
+<div class="card-dose">
+${arredondar(mlSuspMin)} a ${arredondar(mlSuspMax)} mL
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Paracetamol 200 mg/mL — gotas
+</div>
+
+<div class="card-dose">
+${Math.round(gotasMin)} a ${Math.round(gotasMax)} gotas
+</div>
+
+<div class="card-small">
+1 gota ≈ 13,3 mg
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Limite máximo diário
+</div>
+
+<div class="card-dose">
+${Math.round(maxDia)} mg/dia
+</div>
+</div>
+
 `;
 }
 
 /* IBUPROFENO */
-if(med=="ibuprofeno"){
-if(idadeAnos<0.5){res.innerHTML="Não usar <6 meses";return;}
-let dose=Math.min(peso*10,300);
+
+if(med==="ibuprofeno"){
+
+if(idadeMeses!==null && idadeMeses<6){
+erro("Ibuprofeno: não usar em menores de 6 meses.");
+return;
+}
+
+let doseMin=peso*5;
+let doseMax=peso*10;
+
+let maxDia=
+peso>30?1200:peso*40;
+
+let tetoDose=
+Math.min(300,maxDia/4);
+
+doseMin=Math.min(doseMin,tetoDose);
+doseMax=Math.min(doseMax,tetoDose);
+
+let gotasMin=doseMin/10;
+let gotasMax=doseMax/10;
 
 html+=`
-<div class="card">
-<div class="card-title">Ibuprofeno 100 mg/mL (gotas)</div>
-<div class="card-dose">${(dose/5).toFixed(0)} gotas</div>
+
+<div class="info">
+<strong>Ibuprofeno</strong><br>
+Dose pediátrica:
+5 a 10 mg/kg/dose até 4x/dia.
 </div>
 
 <div class="card">
-<div class="card-title">Ibuprofeno 200 mg/mL (gotas)</div>
-<div class="card-dose">${(dose/10).toFixed(0)} gotas</div>
+<div class="card-title">
+Ibuprofeno 100 mg/mL — gotas
 </div>
+
+<div class="card-dose">
+${Math.round(gotasMin)} a ${Math.round(gotasMax)} gotas
+</div>
+
+<div class="card-small">
+1 gota = 10 mg
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Limite máximo diário
+</div>
+
+<div class="card-dose">
+${Math.round(maxDia)} mg/dia
+</div>
+</div>
+
 `;
 }
 
-/* HEDERA */
-if(med=="hedera"){
-let d=idadeAnos<6?"2 mL":idadeAnos<12?"4 mL":"6 mL";
+/* HEDERA HELIX */
+
+if(med==="hedera"){
+
+if(idadeAnos===null){
+erro("Informe a idade.");
+return;
+}
+
+let ml="";
+let maxDia="";
+
+if(idadeAnos>=2 && idadeAnos<6){
+ml="2 mL";
+maxDia="6 mL/dia";
+}
+else if(idadeAnos>=6 && idadeAnos<=12){
+ml="4 mL";
+maxDia="12 mL/dia";
+}
+else if(idadeAnos>12){
+ml="6 mL";
+maxDia="18 mL/dia";
+}
+else{
+erro("Hedera helix: uso habitual a partir de 2 anos.");
+return;
+}
 
 html+=`
-<div class="card">
-<div class="card-title">Hedera helix 15 mg/mL</div>
-<div class="card-dose">${d}</div>
+
+<div class="info">
+<strong>Hedera helix</strong><br>
+Apresentação: 15 mg/mL.
 </div>
+
+<div class="card">
+<div class="card-title">
+Hedera helix 15 mg/mL
+</div>
+
+<div class="card-dose">
+${ml}
+</div>
+
+<div class="card-small">
+Tomar de 8/8 horas,
+três vezes ao dia.<br>
+Dose máxima diária:
+${maxDia}
+</div>
+</div>
+
 `;
 }
 
 /* DESLORATADINA */
-if(med=="desloratadina"){
-let d=idadeAnos<6?"2,5 mL":idadeAnos<12?"2,5 mg":"5 mg";
+
+if(med==="desloratadina"){
+
+if(idadeMeses===null){
+erro("Informe a idade.");
+return;
+}
+
+let dose="";
+let ml="";
+
+if(idadeMeses>=6 && idadeMeses<=11){
+dose="1 mg";
+ml="2 mL";
+}
+else if(idadeMeses>=12 && idadeAnos<6){
+dose="1,25 mg";
+ml="2,5 mL";
+}
+else if(idadeAnos>=6 && idadeAnos<12){
+dose="2,5 mg";
+ml="5 mL";
+}
+else if(idadeAnos>=12){
+dose="5 mg";
+ml="10 mL";
+}
+else{
+erro("Uso pediátrico habitual acima de 6 meses.");
+return;
+}
 
 html+=`
-<div class="card">
-<div class="card-title">Desloratadina</div>
-<div class="card-dose">${d}</div>
+
+<div class="info">
+<strong>Desloratadina</strong><br>
+Apresentação: 0,5 mg/mL.
 </div>
+
+<div class="card">
+<div class="card-title">
+Desloratadina
+</div>
+
+<div class="card-dose">
+${ml}
+</div>
+
+<div class="card-small">
+Equivalente a ${dose},
+1x/dia
+</div>
+</div>
+
 `;
 }
 
 /* SIMETICONA */
-if(med=="simeticona"){
-let g=Math.min(peso,20);
+
+if(med==="simeticona"){
+
+let gotas=
+Math.min(Math.round(peso),20);
 
 html+=`
-<div class="card">
-<div class="card-title">Simeticona</div>
-<div class="card-dose">${g} gotas</div>
+
+<div class="info">
+<strong>Simeticona</strong><br>
+1 gota/kg/dose,
+máximo de 20 gotas.
 </div>
+
+<div class="card">
+<div class="card-title">
+Simeticona 75 mg/mL
+</div>
+
+<div class="card-dose">
+${gotas} gotas
+</div>
+
+<div class="card-small">
+1 gota ≈ 3 mg
+</div>
+</div>
+
 `;
 }
 
@@ -295,9 +695,22 @@ res.innerHTML=html;
 
 }
 
-/* WHATSAPP */
 function abrirWhatsApp(){
-window.open("https://wa.me/55SEUNUMERO", "_blank");
+
+const mensagem=encodeURIComponent(
+`Olá, gostaria de agendar uma consulta com o Dr. Felipe.
+
+Paciente:
+Idade:
+
+Preferência de dia/horário:`
+);
+
+window.open(
+`https://wa.me/5512997465150?text=${mensagem}`,
+"_blank"
+);
+
 }
 
 </script>
