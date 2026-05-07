@@ -23,13 +23,8 @@
   --dour-bg:#F7F1E4;
   --sombra:0 18px 45px rgba(0,0,0,.12);
 }
-
 *{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
-
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
@@ -37,9 +32,7 @@ body{
   color:var(--texto);
   min-height:100vh;
 }
-
 body.menu-open{overflow:hidden}
-
 .topbar{
   position:sticky;
   top:0;
@@ -47,13 +40,12 @@ body.menu-open{overflow:hidden}
   background:rgba(248,247,245,.94);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(194,164,109,.35);
-  height:68px;
+  min-height:78px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0 18px;
+  padding:10px 18px;
 }
-
 .menu-btn{
   position:absolute;
   left:18px;
@@ -72,19 +64,13 @@ body.menu-open{overflow:hidden}
   cursor:pointer;
   box-shadow:0 8px 22px rgba(0,0,0,.08);
 }
-
 .menu-btn span{
   height:2px;
   background:var(--verde);
   border-radius:20px;
   display:block;
 }
-
-.brand{
-  text-align:center;
-  line-height:1.1;
-}
-
+.brand{text-align:center;line-height:1.1}
 .brand h1{
   margin:0;
   font-family:'Playfair Display',serif;
@@ -92,7 +78,13 @@ body.menu-open{overflow:hidden}
   font-size:25px;
   font-weight:600;
 }
-
+.brand p{
+  margin:6px 0 0;
+  color:var(--dourado);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+}
 .drawer-backdrop{
   display:none;
   position:fixed;
@@ -100,7 +92,6 @@ body.menu-open{overflow:hidden}
   background:rgba(0,0,0,.35);
   z-index:40;
 }
-
 .drawer{
   position:fixed;
   top:0;
@@ -115,32 +106,26 @@ body.menu-open{overflow:hidden}
   padding:24px 20px;
   overflow:auto;
 }
-
 body.menu-open .drawer{left:0}
 body.menu-open .drawer-backdrop{display:block}
-
 .drawer-header{
   border-bottom:1px solid rgba(194,164,109,.45);
   padding-bottom:18px;
   margin-bottom:16px;
 }
-
 .drawer-header h2{
   margin:0;
   font-family:'Playfair Display',serif;
   color:var(--verde);
   font-size:24px;
 }
-
 .drawer-header p{
   margin:8px 0 0;
   color:var(--cinza);
   font-size:12px;
   line-height:1.4;
 }
-
 .nav-section{margin:18px 0}
-
 .nav-title{
   font-size:11px;
   text-transform:uppercase;
@@ -149,7 +134,6 @@ body.menu-open .drawer-backdrop{display:block}
   margin:0 0 8px;
   font-weight:700;
 }
-
 .nav-item{
   width:100%;
   border:0;
@@ -167,9 +151,7 @@ body.menu-open .drawer-backdrop{display:block}
   justify-content:space-between;
   align-items:center;
 }
-
 .nav-item:hover{background:var(--verde-bg)}
-
 .close-drawer{
   margin-top:16px;
   width:100%;
@@ -181,25 +163,17 @@ body.menu-open .drawer-backdrop{display:block}
   font-weight:700;
   cursor:pointer;
 }
-
 .container{
   max-width:980px;
   margin:auto;
   padding:26px 16px 60px;
 }
-
-.section{
-  display:none;
-  animation:fade .25s ease;
-}
-
+.section{display:none;animation:fade .25s ease}
 .section.active{display:block}
-
 @keyframes fade{
   from{opacity:.4; transform:translateY(6px)}
   to{opacity:1; transform:none}
 }
-
 .card{
   background:#fff;
   border-radius:24px;
@@ -208,37 +182,36 @@ body.menu-open .drawer-backdrop{display:block}
   border:1px solid rgba(194,164,109,.35);
   box-shadow:0 14px 35px rgba(0,0,0,.08);
 }
-
-.card h2,
-.card h3{
+.card h2,.card h3{
   margin:0 0 15px;
   font-family:'Playfair Display',serif;
   color:var(--verde);
   font-size:29px;
 }
-
-.card h4{
-  color:var(--verde);
-  margin:18px 0 8px;
-}
-
+.card h4{color:var(--verde);margin:18px 0 8px}
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
 }
-
 .grid-3{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
 }
-
-@media(max-width:760px){
-  .grid,.grid-3{grid-template-columns:1fr}
-  .brand h1{font-size:22px}
+.med-row{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+.eletro-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.eletro-col{
+  background:linear-gradient(180deg,#fff,var(--off));
+  border:1px solid rgba(194,164,109,.45);
+  border-radius:20px;
+  padding:16px;
 }
-
+@media(max-width:760px){
+  .grid,.grid-3,.eletro-grid{grid-template-columns:1fr}
+  .brand h1{font-size:22px}
+  .brand p{font-size:11px}
+}
 label{
   display:block;
   font-size:12px;
@@ -246,7 +219,6 @@ label{
   margin:0 0 6px;
   font-weight:700;
 }
-
 input,select,textarea{
   width:100%;
   padding:14px 13px;
@@ -257,12 +229,10 @@ input,select,textarea{
   color:var(--texto);
   outline:none;
 }
-
 input:focus,select:focus,textarea:focus{
   border-color:var(--dourado);
   box-shadow:0 0 0 3px rgba(194,164,109,.17);
 }
-
 .btn{
   width:100%;
   border:1.5px solid var(--dourado);
@@ -275,19 +245,8 @@ input:focus,select:focus,textarea:focus{
   font-size:14px;
   margin-top:12px;
 }
-
-.btn.primary{
-  background:var(--verde);
-  color:#fff;
-  border-color:var(--verde);
-}
-
-.btn.danger{
-  background:var(--vermelho);
-  color:#fff;
-  border-color:var(--vermelho);
-}
-
+.btn.primary{background:var(--verde);color:#fff;border-color:var(--verde)}
+.btn.danger{background:var(--vermelho);color:#fff;border-color:var(--vermelho)}
 .result{
   margin-top:18px;
   padding:18px;
@@ -295,12 +254,7 @@ input:focus,select:focus,textarea:focus{
   background:var(--verde-bg);
   border:1px solid rgba(79,91,74,.25);
 }
-
-.result h4{
-  margin:0 0 10px;
-  color:var(--verde);
-}
-
+.result h4{margin:0 0 10px;color:var(--verde)}
 .dose-box{
   background:#fff;
   border:1px solid rgba(194,164,109,.55);
@@ -308,9 +262,7 @@ input:focus,select:focus,textarea:focus{
   padding:14px;
   margin:10px 0;
 }
-
 .dose-box strong{color:var(--verde)}
-
 .alert{
   background:var(--vermelho-bg);
   color:var(--vermelho);
@@ -321,7 +273,6 @@ input:focus,select:focus,textarea:focus{
   line-height:1.45;
   font-size:13px;
 }
-
 .note{
   background:var(--dour-bg);
   border:1px solid rgba(194,164,109,.45);
@@ -332,13 +283,10 @@ input:focus,select:focus,textarea:focus{
   line-height:1.45;
   font-size:13px;
 }
-
-.list{
-  padding-left:18px;
-  line-height:1.65;
-  color:var(--texto);
+.legal-fixed{
+  border-left:5px solid var(--dourado);
 }
-
+.list{padding-left:18px;line-height:1.65;color:var(--texto)}
 .alg-card{
   background:linear-gradient(180deg,#fff,var(--off));
   border:1px solid rgba(194,164,109,.45);
@@ -346,12 +294,35 @@ input:focus,select:focus,textarea:focus{
   padding:16px;
   margin:12px 0;
 }
-
-.alg-card h4{
-  margin:0 0 8px;
-  color:var(--verde);
+.flow{
+  display:grid;
+  gap:12px;
+  margin-top:12px;
 }
-
+.flow-step{
+  position:relative;
+  padding:14px 16px;
+  background:#fff;
+  border:1px solid rgba(194,164,109,.55);
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+.flow-step:not(:last-child)::after{
+  content:"↓";
+  display:block;
+  text-align:center;
+  color:var(--dourado);
+  font-size:24px;
+  font-weight:800;
+  margin:8px 0 -2px;
+}
+.flow-step strong{color:var(--verde)}
+.flow-branch{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+@media(max-width:760px){.flow-branch{grid-template-columns:1fr}}
 .badge{
   display:inline-block;
   background:var(--verde);
@@ -361,15 +332,7 @@ input:focus,select:focus,textarea:focus{
   font-size:11px;
   margin:3px 4px 3px 0;
 }
-
-.footer{
-  text-align:center;
-  color:var(--cinza);
-  font-size:11px;
-  margin-top:30px;
-  line-height:1.5;
-}
-
+.footer{text-align:center;color:var(--cinza);font-size:11px;margin-top:30px;line-height:1.5}
 .modal{
   position:fixed;
   inset:0;
@@ -380,7 +343,6 @@ input:focus,select:focus,textarea:focus{
   justify-content:center;
   padding:18px;
 }
-
 .modal-box{
   max-width:680px;
   background:#fff;
@@ -389,111 +351,16 @@ input:focus,select:focus,textarea:focus{
   box-shadow:var(--sombra);
   border:1px solid rgba(194,164,109,.6);
 }
-
 .modal-box h2{
   margin:0 0 10px;
   font-family:'Playfair Display',serif;
   color:var(--verde);
 }
-
-.modal-box p,.modal-box li{
-  font-size:13px;
-  line-height:1.55;
-  color:var(--texto);
-}
-
-.modal-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-@media(max-width:540px){
-  .modal-actions{grid-template-columns:1fr}
-}
-
-.small{
-  font-size:11px;
-  color:var(--cinza);
-}
-
-hr{
-  border:0;
-  border-top:1px solid rgba(194,164,109,.35);
-  margin:18px 0;
-}
-.calc-top-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-
-.calc-med-row{
-  margin-top:12px;
-  display:grid;
-  grid-template-columns:1fr;
-}
-
-.eletrolitos-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.eletrolito-col{
-  background:linear-gradient(180deg,#fff,var(--off));
-  border:1px solid rgba(194,164,109,.45);
-  border-radius:20px;
-  padding:16px;
-}
-
-.flow{
-  display:grid;
-  gap:12px;
-  margin-top:14px;
-}
-
-.flow-row{
-  display:grid;
-  grid-template-columns:1fr 42px 1fr;
-  gap:10px;
-  align-items:center;
-}
-
-.flow-step{
-  background:#fff;
-  border:1px solid rgba(194,164,109,.55);
-  border-radius:18px;
-  padding:14px;
-  box-shadow:0 8px 20px rgba(0,0,0,.05);
-  min-height:72px;
-}
-
-.flow-step strong{
-  color:var(--verde);
-}
-
-.flow-arrow{
-  text-align:center;
-  color:var(--dourado);
-  font-weight:900;
-  font-size:22px;
-}
-
-.flow-down{
-  text-align:center;
-  color:var(--dourado);
-  font-weight:900;
-  font-size:22px;
-  margin:-3px 0;
-}
-
-@media(max-width:760px){
-  .calc-top-grid,.eletrolitos-grid{grid-template-columns:1fr}
-  .flow-row{grid-template-columns:1fr}
-  .flow-arrow{transform:rotate(90deg)}
-}
-
+.modal-box p,.modal-box li{font-size:13px;line-height:1.55;color:var(--texto)}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:540px){.modal-actions{grid-template-columns:1fr}}
+.small{font-size:11px;color:var(--cinza)}
+hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
 </style>
 </head>
 
@@ -501,16 +368,15 @@ hr{
 
 <div class="modal" id="termsModal">
   <div class="modal-box">
-    <h2>Uso restrito com orientação médica</h2>
+    <h2>Termo de uso e responsabilidade médica</h2>
     <p>
-      Esta calculadora é ferramenta auxiliar de apoio clínico, destinada a profissionais habilitados.
-      As doses exibidas devem ser obrigatoriamente conferidas com bula, protocolo institucional, condição clínica,
-      idade, peso, função renal/hepática, alergias, via disponível e julgamento médico.
+      Esta calculadora é uma ferramenta auxiliar de apoio clínico e deve ser utilizada exclusivamente por profissional habilitado.
+      A abertura desta página exige ciência expressa de que os resultados não substituem prescrição médica individualizada.
     </p>
     <ul>
-      <li>Não substitui prescrição médica individualizada.</li>
-      <li>Medicamentos de emergência, sedativos, opioides, eletrólitos concentrados e drogas vasoativas exigem dupla checagem.</li>
-      <li>Em pediatria, sempre conferir idade mínima, peso mínimo, apresentação e teto por dose.</li>
+      <li>Conferir obrigatoriamente bula, protocolo institucional, idade, peso, indicação, alergias, função renal/hepática, via, diluição e concentração.</li>
+      <li>Medicamentos de emergência, sedativos, opioides, bloqueadores neuromusculares, eletrólitos concentrados e drogas vasoativas exigem dupla checagem.</li>
+      <li>Em pediatria, sempre conferir idade mínima, peso mínimo, apresentação, dose máxima por dose e dose máxima diária.</li>
       <li>Se a dose por peso ultrapassar o teto, a calculadora reduz ao teto e exibe alerta.</li>
     </ul>
     <div class="modal-actions">
@@ -553,26 +419,31 @@ hr{
 
   <div class="brand">
     <h1>Calculadora Médica</h1>
+    <p>Dr. Felipe Dias Figueiredo · CRM-SP 189357</p>
   </div>
 </header>
 
 <main class="container">
 
+<div class="note legal-fixed">
+  <strong>Aviso legal permanente:</strong> ferramenta de apoio clínico para uso por profissional habilitado. 
+  Não substitui avaliação médica, prescrição individualizada, protocolos institucionais ou conferência em bula. 
+  Doses críticas exigem dupla checagem.
+</div>
+
 <section id="calc" class="section active">
   <div class="card">
     <h2>Calculadora de doses</h2>
 
-    <div class="calc-top-grid">
+    <div class="grid-3">
       <div>
         <label>Peso do paciente, em kg</label>
         <input id="peso" type="number" step="0.1" placeholder="Ex.: 18">
       </div>
-
       <div>
         <label>Idade</label>
         <input id="idade" type="number" step="1" placeholder="Ex.: 4">
       </div>
-
       <div>
         <label>Unidade da idade</label>
         <select id="idadeUnidade">
@@ -582,7 +453,7 @@ hr{
       </div>
     </div>
 
-    <div class="calc-med-row">
+    <div class="med-row">
       <div>
         <label>Medicamento</label>
         <select id="medicamento"></select>
@@ -611,25 +482,23 @@ hr{
 
       <div>
         <label>Percentual da hidratação de manutenção</label>
-        <input id="percHid" type="number" step="1" value="100" placeholder="Ex.: 100">
+        <input id="percHid" type="number" step="1" value="100">
         <span class="small">Digite o percentual desejado. Padrão: 100%.</span>
       </div>
     </div>
 
     <hr>
 
-    <h4>Eletrólitos da solução</h4>
-
-    <div class="eletrolitos-grid">
-      <div class="eletrolito-col">
+    <div class="eletro-grid">
+      <div class="eletro-col">
         <h4>Sódio</h4>
         <label>Necessidade diária de sódio considerada</label>
         <input id="naNecessidade" type="number" step="0.1" value="3">
-        <span class="small">Padrão: 3 mEq/kg/dia. Ajuste conforme protocolo.</span>
+        <span class="small">Padrão: 3 mEq/kg/dia.</span>
 
         <label style="margin-top:12px">Percentual do sódio diário a repor</label>
         <input id="naPercentual" type="number" step="1" value="40">
-        <span class="small">Padrão solicitado: 40%.</span>
+        <span class="small">Padrão: 40%.</span>
 
         <label style="margin-top:12px">Fonte de sódio</label>
         <select id="naFonte">
@@ -638,15 +507,15 @@ hr{
         </select>
       </div>
 
-      <div class="eletrolito-col">
+      <div class="eletro-col">
         <h4>Potássio</h4>
         <label>Necessidade diária de potássio considerada</label>
         <input id="kNecessidade" type="number" step="0.1" value="2">
-        <span class="small">Padrão: 2 mEq/kg/dia. Ajuste conforme protocolo.</span>
+        <span class="small">Padrão: 2 mEq/kg/dia.</span>
 
         <label style="margin-top:12px">Percentual do potássio diário a repor</label>
         <input id="kPercentual" type="number" step="1" value="20">
-        <span class="small">Padrão solicitado: 20%.</span>
+        <span class="small">Padrão: 20%.</span>
 
         <label style="margin-top:12px">Fonte de potássio</label>
         <select id="kFonte">
@@ -729,12 +598,25 @@ hr{
   <div class="card">
     <h3>Emergência / drogas críticas</h3>
 
-    <div class="grid">
+    <div class="grid-3">
       <div>
         <label>Peso, em kg</label>
         <input id="pesoEmerg" type="number" step="0.1" placeholder="Ex.: 20">
       </div>
+      <div>
+        <label>Idade</label>
+        <input id="idadeEmerg" type="number" step="1" placeholder="Ex.: 4">
+      </div>
+      <div>
+        <label>Unidade da idade</label>
+        <select id="idadeEmergUnidade">
+          <option value="anos">Anos</option>
+          <option value="meses">Meses</option>
+        </select>
+      </div>
+    </div>
 
+    <div class="med-row">
       <div>
         <label>Droga</label>
         <select id="drogaEmerg">
@@ -765,21 +647,17 @@ hr{
   <div class="card">
     <h3>PALS — fluxograma pediátrico</h3>
     <div class="flow">
-      <div class="flow-step"><strong>1. Avaliação inicial</strong><br>Responsividade, respiração, pulso, monitor/desfibrilador, oxigênio e acesso IV/IO.</div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>PCR?</strong><br>Sem pulso ou FC &lt;60/min com má perfusão apesar de oxigenação.</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><strong>RCP de alta qualidade</strong><br>Compressões efetivas, mínima pausa, ventilação adequada e troca de compressor.</div>
+      <div class="flow-step"><strong>1. Reconhecer gravidade</strong><br>Responsividade, respiração, pulso, perfusão, monitorização e glicemia.</div>
+      <div class="flow-step"><strong>2. ABCDE</strong><br>Via aérea, ventilação/oxigênio, circulação/acesso IV-IO, neurologia e exposição.</div>
+      <div class="flow-step">
+        <strong>3. Definir cenário</strong>
+        <div class="flow-branch">
+          <div class="dose-box"><strong>PCR</strong><br>RCP alta qualidade, monitor/desfibrilador, adrenalina, choque se ritmo chocável.</div>
+          <div class="dose-box"><strong>Instabilidade com pulso</strong><br>Bradicardia, taquicardia, choque, insuficiência respiratória.</div>
+        </div>
       </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>Ritmo chocável</strong><br>FV/TV sem pulso: choque 2 J/kg → 4 J/kg → ≥4 J/kg. Adrenalina e amiodarona conforme ciclos.</div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-step"><strong>Ritmo não chocável</strong><br>Assistolia/AESP: RCP + adrenalina 0,01 mg/kg IV/IO a cada 3–5 min.</div>
-      </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-step"><strong>Reavaliar a cada 2 minutos</strong><br>Ritmo, pulso, qualidade da RCP, capnografia se disponível, causas reversíveis Hs e Ts.</div>
+      <div class="flow-step"><strong>4. PCR</strong><br>Adrenalina 0,01 mg/kg IV/IO. FV/TV sem pulso: desfibrilar 2 J/kg, depois 4 J/kg, considerar amiodarona 5 mg/kg.</div>
+      <div class="flow-step"><strong>5. Causas reversíveis</strong><br>Hipóxia, hipovolemia, H+, hipo/hipercalemia, hipotermia, tensão no tórax, tamponamento, toxinas, trombose.</div>
     </div>
   </div>
 </section>
@@ -788,58 +666,37 @@ hr{
   <div class="card">
     <h3>ACLS — fluxograma adulto</h3>
     <div class="flow">
-      <div class="flow-step"><strong>1. Checar responsividade e pulso</strong><br>Acionar equipe, monitor/desfibrilador, oxigênio, acesso IV/IO e RCP se sem pulso.</div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>FV/TV sem pulso</strong><br>Desfibrilar, RCP 2 min, adrenalina 1 mg a cada 3–5 min, amiodarona se refratária.</div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-step"><strong>Assistolia/AESP</strong><br>RCP 2 min, adrenalina 1 mg a cada 3–5 min, tratar causas reversíveis.</div>
+      <div class="flow-step"><strong>1. Avaliação inicial</strong><br>Responsividade, respiração, pulso, monitor/desfibrilador, acesso IV/IO e oxigênio se indicado.</div>
+      <div class="flow-step">
+        <strong>2. Ritmo</strong>
+        <div class="flow-branch">
+          <div class="dose-box"><strong>Chocável</strong><br>FV/TV sem pulso: choque, RCP, adrenalina, amiodarona.</div>
+          <div class="dose-box"><strong>Não chocável</strong><br>AESP/assistolia: RCP, adrenalina precoce, causas reversíveis.</div>
+        </div>
       </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>Bradicardia sintomática</strong><br>Atropina 1 mg IV, repetir até 3 mg; se refratária: marcapasso, dopamina ou adrenalina.</div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-step"><strong>Taquicardia com pulso</strong><br>Instável: cardioversão sincronizada. Estável: tratar conforme QRS e regularidade.</div>
-      </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-step"><strong>Pós-ROSC</strong><br>Via aérea, oxigenação, pressão, ECG, causa de PCR, temperatura e transferência/UTI.</div>
+      <div class="flow-step"><strong>3. Bradicardia sintomática</strong><br>Atropina 1 mg IV a cada 3–5 min, máximo 3 mg. Se refratária: marcapasso, dopamina ou adrenalina.</div>
+      <div class="flow-step"><strong>4. Taquicardia com pulso</strong><br>Instável: cardioversão sincronizada. Estável: QRS estreito/largo, adenosina se regular estreito, antiarrítmico conforme caso.</div>
+      <div class="flow-step"><strong>5. Pós-ROSC</strong><br>Oxigenação, ventilação, PA, ECG, temperatura, glicemia, causa base e transferência.</div>
     </div>
   </div>
 </section>
 
 <section id="atls" class="section">
   <div class="card">
-    <h3>ATLS — fluxograma do trauma</h3>
+    <h3>ATLS / Trauma — fluxograma inicial</h3>
     <div class="flow">
-      <div class="flow-step"><strong>Preparação e segurança</strong><br>Equipe, EPIs, mecanismo, cinemática, recursos, aviso para centro de trauma se necessário.</div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>A — Airway</strong><br>Via aérea com proteção cervical. Considerar IOT se falha de proteção, rebaixamento ou hipoxemia.</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><strong>B — Breathing</strong><br>Inspecionar, auscultar, tratar pneumotórax hipertensivo, tórax aberto e ventilação inadequada.</div>
-      </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>C — Circulation</strong><br>Controle de hemorragia, acesso calibroso/IO, reposição hemostática, ácido tranexâmico se indicado.</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><strong>D — Disability</strong><br>Glasgow, pupilas, glicemia, lateralização, convulsão e sinais de hipertensão intracraniana.</div>
-      </div>
-      <div class="flow-down">↓</div>
-      <div class="flow-row">
-        <div class="flow-step"><strong>E — Exposure</strong><br>Exposição completa, busca de lesões e prevenção ativa de hipotermia.</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step"><strong>Reavaliação</strong><br>ABCDE seriado, exames adjuntos, FAST/RX/TC conforme estabilidade e transferência se necessário.</div>
-      </div>
+      <div class="flow-step"><strong>1. Preparação e segurança</strong><br>Equipe, EPI, mecanismo, cinemática, aquecimento e acionamento de recursos.</div>
+      <div class="flow-step"><strong>2. A — Airway + cervical</strong><br>Via aérea pérvia com proteção cervical. Considerar IOT se rebaixamento, falência ventilatória ou proteção inadequada.</div>
+      <div class="flow-step"><strong>3. B — Breathing</strong><br>Ventilação, ausculta, pneumotórax hipertensivo, ferida aberta, tórax instável e oxigênio.</div>
+      <div class="flow-step"><strong>4. C — Circulation</strong><br>Controle de hemorragia, pulso, pele, PA, acesso calibroso/IO, hemoderivados conforme choque.</div>
+      <div class="flow-step"><strong>5. D — Disability</strong><br>Glasgow, pupilas, glicemia, lateralização, convulsão e sinais de hipertensão intracraniana.</div>
+      <div class="flow-step"><strong>6. E — Exposure</strong><br>Exposição completa, prevenção de hipotermia, reavaliação contínua e secondary survey após estabilização.</div>
     </div>
   </div>
 </section>
 
-
-
-
-
 <div class="footer">
-  Calculadora Médica · Ferramenta de apoio médico · Uso profissional com conferência obrigatória.
+  Dr. Felipe Dias Figueiredo · CRM-SP 189357 · Calculadora Médica · Ferramenta de apoio profissional com conferência obrigatória.
 </div>
 
 </main>
@@ -907,18 +764,18 @@ const meds = [
   dose:1,
   unidade:"mg/kg/dose",
   intervalo:"8/8h ou 12/12h",
-  teto:50,
+  teto:100,
   idadeMinMeses:6,
   pesoMin:0,
-  vias:"VO / EV / IM conforme apresentação",
+  vias:"VO / IM / EV conforme apresentação",
   apresentacoes:[
     {nome:"Gotas 20 mg/mL", conc:20, tipo:"gotas"},
-    {nome:"Cápsula/comprimido 50 mg", fixo:50, tipo:"comprimido"},
-    {nome:"Comprimido/cápsula 100 mg", fixo:100, tipo:"comprimido"},
-    {nome:"IM 100 mg/2 mL", conc:50, tipo:"mL"},
-    {nome:"IV frasco-ampola 100 mg — diluir em 100 a 150 mL", fixo:100, tipo:"frasco"}
+    {nome:"Comprimido 50 mg", fixo:50, tipo:"comprimido"},
+    {nome:"Comprimido/Cápsula 100 mg", fixo:100, tipo:"comprimido"},
+    {nome:"Ampola IM 100 mg/2 mL", conc:50, tipo:"mL"},
+    {nome:"Frasco-ampola EV 100 mg para diluição", fixo:100, tipo:"frasco"}
   ],
-  alertas:["AINE: evitar em dengue suspeita, DRC, desidratação, sangramento e plaquetopenia.","Uso pediátrico deve ser restrito e conferido em bula/protocolo.","IM: 100 mg/2 mL. IV: frasco-ampola 100 mg para diluição, não ampola EV pronta."]
+  alertas:["AINE: evitar em dengue suspeita, DRC, desidratação, sangramento e plaquetopenia.","Apresentação IM usual: 100 mg/2 mL.","Apresentação EV usual: frasco-ampola 100 mg para diluição em 100–150 mL, não ampola EV pronta."]
 },
 {
   nome:"Naproxeno",
@@ -1298,7 +1155,7 @@ const meds = [
 
 const emerg = {
   adrenalina_pcr:{nome:"Adrenalina PCR IV/IO", dose:0.01, unidade:"mg/kg", teto:1, conc:0.1, obs:"Usar concentração 0,1 mg/mL. Repetir a cada 3–5 min conforme protocolo."},
-  adrenalina_anafilaxia:{nome:"Adrenalina IM anafilaxia", dose:0.01, unidade:"mg/kg", teto:0.5, conc:1, obs:"Usar 1 mg/mL IM, face anterolateral da coxa. Até 11 anos: dose máxima 0,3 mL (0,3 mg). Adultos/adolescentes maiores: até 0,5 mL conforme protocolo."},
+  adrenalina_anafilaxia:{nome:"Adrenalina IM anafilaxia", dose:0.01, unidade:"mg/kg", teto:0.5, conc:1, obs:"Usar 1 mg/mL IM, face anterolateral da coxa. Até 11 anos, limitar a 0,3 mL. Adulto: 0,5 mL."},
   atropina:{nome:"Atropina", dose:0.02, unidade:"mg/kg", teto:0.5, conc:0.25, obs:"Dose mínima 0,1 mg em pediatria. Adulto ACLS: 1 mg."},
   adenosina1:{nome:"Adenosina 1ª dose", dose:0.1, unidade:"mg/kg", teto:6, conc:3, obs:"Flush rápido imediatamente após. Monitorização."},
   adenosina2:{nome:"Adenosina 2ª dose", dose:0.2, unidade:"mg/kg", teto:12, conc:3, obs:"Flush rápido imediatamente após. Monitorização."},
@@ -1347,6 +1204,12 @@ function goSection(id){
 function idadeMeses(){
   const idade = parseFloat(document.getElementById("idade").value || 0);
   const un = document.getElementById("idadeUnidade").value;
+  return un === "anos" ? idade*12 : idade;
+}
+
+function idadeEmergMeses(){
+  const idade = parseFloat(document.getElementById("idadeEmerg").value || 0);
+  const un = document.getElementById("idadeEmergUnidade").value;
   return un === "anos" ? idade*12 : idade;
 }
 
@@ -1420,14 +1283,16 @@ function calcularDose(){
     }
   });
 
-  html += `<div class="alert"><strong>Alertas:</strong><br>${alertas.map(x=>"• "+x).join("<br>")}</div>`;
+  html += `<div class="alert"><strong>Avisos específicos:</strong><br>${alertas.map(x=>"• "+x).join("<br>")}</div>`;
   html += `</div>`;
   out.innerHTML = html;
 }
 
 function calcularEmergencia(){
   const peso = parseFloat(document.getElementById("pesoEmerg").value);
-  const d = emerg[document.getElementById("drogaEmerg").value];
+  const idadeM = idadeEmergMeses();
+  const key = document.getElementById("drogaEmerg").value;
+  const d = emerg[key];
   const out = document.getElementById("resultadoEmerg");
 
   if(!peso || peso<=0){
@@ -1436,12 +1301,14 @@ function calcularEmergencia(){
   }
 
   let doseCalc = peso * d.dose;
-  let tetoUsado = d.teto;
-  if(document.getElementById("drogaEmerg").value === "adrenalina_anafilaxia"){
-    const idadeM = idadeMeses();
-    if(idadeM > 0 && idadeM <= 132){ tetoUsado = 0.3; }
+  let doseFinal = Math.min(doseCalc, d.teto);
+  let obsExtra = "";
+
+  if(key === "adrenalina_anafilaxia" && idadeM > 0 && idadeM <= 132){
+    doseFinal = Math.min(doseFinal, 0.3);
+    obsExtra = "Dose limitada a 0,3 mL por idade até 11 anos.";
   }
-  let doseFinal = Math.min(doseCalc, tetoUsado);
+
   let unidadeFinal = d.unidade.includes("mcg") ? "mcg" : d.unidade.includes("mL") ? "mL" : "mg";
   let volume = d.conc ? doseFinal / d.conc : null;
 
@@ -1454,7 +1321,7 @@ function calcularEmergencia(){
         ${doseFinal < doseCalc ? `<br><span style="color:#A94442;font-weight:800">Dose reduzida ao teto.</span>` : ``}
         ${volume !== null ? `<br><strong>Volume:</strong> ${volume.toFixed(2)} mL` : ``}
       </div>
-      <div class="alert">${d.obs}</div>
+      <div class="alert">${d.obs}${obsExtra ? "<br><strong>"+obsExtra+"</strong>" : ""}</div>
     </div>
   `;
 }
@@ -1477,8 +1344,8 @@ function calcularHidratacao(){
     return;
   }
 
-  if(!naNec || !naPct || !kNec || !kPct){
-    out.innerHTML = `<div class="alert">Informe valores válidos para sódio e potássio.</div>`;
+  if(!perc || perc<=0 || !naNec || !naPct || !kNec || !kPct){
+    out.innerHTML = `<div class="alert">Informe valores válidos para hidratação, sódio e potássio.</div>`;
     return;
   }
 
@@ -1510,7 +1377,7 @@ function calcularHidratacao(){
 
       <div class="dose-box">
         <strong>Manutenção 100%:</strong> ${manutencao.toFixed(0)} mL/dia<br>
-        <strong>Percentual selecionado:</strong> ${(perc*100).toFixed(0)}%<br>
+        <strong>Percentual digitado:</strong> ${(perc*100).toFixed(0)}%<br>
         <strong>Volume final da solução:</strong> ${volumeFinal.toFixed(0)} mL/24h<br>
         <strong>Velocidade:</strong> ${velocidade.toFixed(1)} mL/h
       </div>
@@ -1586,7 +1453,6 @@ function calcularOpioide(){
 }
 
 function acceptTerms(){
-  localStorage.setItem("termosCalculadoraMedica","aceito");
   document.getElementById("termsModal").style.display="none";
 }
 
@@ -1602,9 +1468,7 @@ function denyTerms(){
 
 window.onload = function(){
   init();
-  if(localStorage.getItem("termosCalculadoraMedica")==="aceito"){
-    document.getElementById("termsModal").style.display="none";
-  }
+  document.getElementById("termsModal").style.display="flex";
 };
 </script>
 
