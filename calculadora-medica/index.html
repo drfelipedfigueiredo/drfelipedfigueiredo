@@ -361,6 +361,10 @@ input:focus,select:focus,textarea:focus{
 @media(max-width:540px){.modal-actions{grid-template-columns:1fr}}
 .small{font-size:11px;color:var(--cinza)}
 hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
+
+#buscaMedicamento{margin-bottom:8px}
+#medicamento{min-height:185px;overflow:auto}
+
 </style>
 </head>
 
@@ -400,7 +404,8 @@ hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
     <button class="nav-item" onclick="goSection('hidratacao')">Holliday-Segar / Solução <span>›</span></button>
     <button class="nav-item" onclick="goSection('opioides')">Equivalência de opioides <span>›</span></button>
     <button class="nav-item" onclick="goSection('emergencia')">Emergência / Drogas críticas <span>›</span></button>
-    <button class="nav-item" onclick="goSection('trombolise')">Trombólise IAM / AVC <span>›</span></button>
+    <button class="nav-item" onclick="goSection('iam')">IAM com supra <span>›</span></button>
+    <button class="nav-item" onclick="goSection('avc')">AVC isquêmico <span>›</span></button>
     <button class="nav-item" onclick="goSection('vacinas')">Vacinas / Profilaxia <span>›</span></button>
     <button class="nav-item" onclick="goSection('sinais')">Sinais vitais pediátricos <span>›</span></button>
   </div>
@@ -459,8 +464,9 @@ hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
     <div class="med-row">
       <div>
         <label>Medicamento</label>
-        <select id="medicamento"></select>
-        <span class="small">Lista organizada por classe farmacológica.</span>
+        <input id="buscaMedicamento" type="text" placeholder="Buscar por princípio ativo ou nome comercial" oninput="filtrarMedicamentos()">
+        <select id="medicamento" size="9"></select>
+        <span class="small">Digite para filtrar. Lista organizada por classe farmacológica.</span>
       </div>
     </div>
 
@@ -563,14 +569,6 @@ hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
           <option value="tapentadol_vo">Tapentadol VO</option>
           <option value="buprenorfina_sl">Buprenorfina SL</option>
           <option value="buprenorfina_td">Buprenorfina transdérmica mcg/h</option>
-
-          <option value="fentanil_ev">Fentanil EV mcg/dia</option>
-          <option value="sufentanil_ev">Sufentanil EV mcg/dia</option>
-          <option value="alfentanil_ev">Alfentanil EV mcg/dia</option>
-          <option value="remifentanil_ev">Remifentanil EV mcg/kg/min</option>
-          <option value="morfina_ev">Morfina EV</option>
-          <option value="tramadol_ev">Tramadol EV</option>
-          <option value="nalbufina_ev">Nalbufina EV/IM/SC</option>
           <option value="fentanil_transdermico">Fentanil transdérmico mcg/h</option>
           <option value="fentanil_ev">Fentanil EV mcg/dia</option>
           <option value="nalbufina_ev">Nalbufina EV/IM/SC</option>
@@ -596,14 +594,6 @@ hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
           <option value="tapentadol_vo">Tapentadol VO</option>
           <option value="buprenorfina_sl">Buprenorfina SL</option>
           <option value="buprenorfina_td">Buprenorfina transdérmica mcg/h</option>
-
-          <option value="fentanil_ev">Fentanil EV mcg/dia</option>
-          <option value="sufentanil_ev">Sufentanil EV mcg/dia</option>
-          <option value="alfentanil_ev">Alfentanil EV mcg/dia</option>
-          <option value="remifentanil_ev">Remifentanil EV mcg/kg/min</option>
-          <option value="morfina_ev">Morfina EV</option>
-          <option value="tramadol_ev">Tramadol EV</option>
-          <option value="nalbufina_ev">Nalbufina EV/IM/SC</option>
           <option value="fentanil_transdermico">Fentanil transdérmico mcg/h</option>
           <option value="fentanil_ev">Fentanil EV mcg/dia</option>
           <option value="nalbufina_ev">Nalbufina EV/IM/SC</option>
@@ -731,85 +721,193 @@ hr{border:0;border-top:1px solid rgba(194,164,109,.35);margin:18px 0}
 
 
 
-<section id="trombolise" class="section">
+
+<section id="iam" class="section">
   <div class="card">
-    <h3>Trombólise — IAM com supra / AVC isquêmico</h3>
+    <h3>Trombólise — IAM com supra de ST</h3>
 
     <div class="alert">
-      <strong>Tempos-limite:</strong><br>
-      • <strong>AVC isquêmico:</strong> considerar trombólise IV em paciente elegível até 4,5 horas do início dos sintomas ou último momento conhecido assintomático. Em janela estendida/indeterminada, apenas com protocolo de imagem avançada e equipe especializada.<br>
-      • <strong>IAM com supra de ST:</strong> considerar fibrinólise preferencialmente nas primeiras 12 horas do início da dor/sintomas, quando angioplastia primária não estiver disponível em tempo adequado e não houver contraindicação.<br>
-      • Esta aba não substitui protocolo institucional, neurologia/cardiologia, tomografia no AVC, ECG seriado, estratificação de risco hemorrágico e consentimento quando aplicável.
+      <strong>Tempo de início dos sintomas:</strong><br>
+      • Até 6 horas: alteplase em regime acelerado de 90 minutos.<br>
+      • Entre 6 e 12 horas: alteplase em regime convencional de 3 horas.<br>
+      • Tenecteplase: bolus EV único conforme faixa de peso.<br>
+      • Não aguardar troponina/exames laboratoriais para realizar trombólise quando a indicação estiver clara.
     </div>
 
     <div class="grid">
       <div>
-        <label>Cenário clínico</label>
-        <select id="tromboCenario" onchange="atualizarTromboAviso()">
-          <option value="avc">AVC isquêmico</option>
-          <option value="iam">IAM com supra de ST</option>
+        <label>Peso, em kg</label>
+        <input id="iamPeso" type="number" step="0.1" placeholder="Ex.: 70">
+      </div>
+      <div>
+        <label>Tempo desde início dos sintomas</label>
+        <select id="iamTempo">
+          <option value="ate6">Até 6 horas</option>
+          <option value="6a12">Entre 6 e 12 horas</option>
+          <option value="mais12">Mais de 12 horas</option>
         </select>
       </div>
-
       <div>
         <label>Fibrinolítico</label>
-        <select id="tromboDroga">
-          <option value="alteplase">Alteplase</option>
-          <option value="tenecteplase">Tenecteplase</option>
+        <select id="iamLytic">
+          <option value="alteplase" selected>Alteplase (rt-PA)</option>
+          <option value="tenecteplase">Tenecteplase (TNK)</option>
         </select>
       </div>
-
-      <div>
-        <label>Peso, em kg</label>
-        <input id="tromboPeso" type="number" step="0.1" placeholder="Ex.: 70">
-      </div>
-
-      <div>
-        <label>Tempo desde início/último bem conhecido</label>
-        <input id="tromboTempo" type="number" step="0.1" placeholder="Horas. Ex.: 2.5">
-      </div>
     </div>
 
-    <button class="btn primary" onclick="calcularTrombolise()">Calcular trombólise</button>
-
-    <div id="resultadoTrombo"></div>
+    <button class="btn primary" onclick="calcularIAM()">Calcular trombólise IAM</button>
+    <div id="resultadoIAM"></div>
 
     <div class="alg-card">
-      <h4>Contraindicações absolutas — checklist rápido</h4>
+      <h4>Paredes supradas e derivações</h4>
       <ul class="list">
-        <li>Hemorragia intracraniana atual ou prévia relevante, lesão vascular cerebral conhecida ou neoplasia intracraniana de alto risco hemorrágico.</li>
-        <li>Suspeita de dissecção de aorta no IAM ou hemorragia subaracnoide no AVC.</li>
-        <li>Sangramento ativo importante ou diátese hemorrágica significativa.</li>
-        <li>Trauma cranioencefálico significativo, cirurgia intracraniana/espinhal recente ou AVC hemorrágico prévio.</li>
-        <li>PA persistentemente muito elevada apesar de tratamento, especialmente no AVC antes da trombólise.</li>
-        <li>AVC: TC/RM com hemorragia, grande área de infarto estabelecido, plaquetas muito baixas, anticoagulação relevante sem reversão/segurança laboratorial.</li>
+        <li><strong>Inferior:</strong> DII, DIII, aVF.</li>
+        <li><strong>Lateral alta:</strong> DI, aVL.</li>
+        <li><strong>Lateral baixa:</strong> V5, V6.</li>
+        <li><strong>Septal:</strong> V1, V2.</li>
+        <li><strong>Anterosseptal:</strong> V1 a V4.</li>
+        <li><strong>Anterior:</strong> V2 a V4 ou V3, V4.</li>
+        <li><strong>Anterior extensa:</strong> DI, aVL, V1 a V6.</li>
+        <li><strong>Posterior:</strong> infra de ST em V1–V3 com R alta; confirmar com V7–V9.</li>
+        <li><strong>Ventrículo direito:</strong> V3R, V4R.</li>
       </ul>
     </div>
 
     <div class="alg-card">
-      <h4>Contraindicações relativas / cautelas</h4>
+      <h4>Contraindicações absolutas — IAM</h4>
       <ul class="list">
-        <li>Uso de anticoagulante oral, coagulopatia, punção não compressível recente ou cirurgia/trauma recente.</li>
-        <li>História de AVC isquêmico recente, sangramento digestivo/urinário recente ou neoplasia com risco hemorrágico.</li>
-        <li>Gestação ou puerpério recente: decisão individualizada, risco-benefício.</li>
-        <li>IAM: RCP traumática/prolongada, hipertensão grave não controlada, úlcera péptica ativa, doença hepática avançada.</li>
-        <li>AVC: sintomas leves não incapacitantes, crise convulsiva no início com déficit pós-ictal provável, glicemia muito baixa/alta até correção e reavaliação.</li>
+        <li>AVC hemorrágico prévio.</li>
+        <li>AVC isquêmico nos últimos 6 meses, exceto AVC isquêmico nas últimas 4h30min quando tratado conforme protocolo de AVC.</li>
+        <li>Malformação arteriovenosa.</li>
+        <li>Lesão ou neoplasia em sistema nervoso central.</li>
+        <li>Trauma de face ou crânio nos últimos 30 dias.</li>
+        <li>Punção não compressível há menos de 24 horas, como biópsia renal/hepática ou punção liquórica.</li>
+        <li>Sangramento ativo, exceto sangramento menstrual.</li>
+        <li>Sangramento do trato gastrointestinal nos últimos 30 dias.</li>
+        <li>Suspeita de dissecção aguda de aorta.</li>
       </ul>
     </div>
 
     <div class="alg-card">
-      <h4>Anticoagulação associada — enoxaparina na fase aguda do IAM com supra</h4>
+      <h4>Contraindicações relativas / cautelas — IAM</h4>
       <ul class="list">
-        <li><strong>Uso nesta aba restrito ao IAM com supra tratado com fibrinolítico.</strong></li>
-        <li><strong>&lt;75 anos:</strong> 30 mg EV em bolus + 1 mg/kg SC 12/12h, com máximo de 100 mg nas primeiras duas doses SC.</li>
-        <li><strong>≥75 anos:</strong> sem bolus EV; 0,75 mg/kg SC 12/12h, máximo 75 mg nas primeiras duas doses SC.</li>
-        <li><strong>ClCr &lt;30 mL/min:</strong> ajustar para 1 mg/kg SC 1x/dia, conforme protocolo.</li>
-        <li><strong>AVC isquêmico:</strong> não usar enoxaparina nesta aba para trombólise do AVC. Após trombólise, não administrar anticoagulante/antiagregante nas primeiras 24 h e repetir imagem antes de iniciar profilaxia/tratamento.</li>
+        <li>PA &gt;180x110mmHg.</li>
+        <li>Uso de anticoagulante.</li>
+        <li>Doença hepática avançada.</li>
+        <li>Úlcera péptica ativa.</li>
+        <li>Ressuscitação cardíaca prolongada.</li>
+        <li>Endocardite infecciosa.</li>
+        <li>Gravidez e primeira semana de puerpério.</li>
+        <li>Ataque isquêmico transitório nos últimos 6 meses.</li>
+      </ul>
+    </div>
+
+    <div class="alg-card">
+      <h4>Enoxaparina na fase aguda do IAM com trombólise</h4>
+      <ul class="list">
+        <li>Uso restrito à fase aguda do IAM com supra tratado com fibrinolítico.</li>
+        <li>30mg EV em bolus + 1mg/kg SC conforme esquema solicitado.</li>
+        <li>Em idoso, insuficiência renal, baixo peso ou alto risco hemorrágico, conferir protocolo institucional e bula.</li>
+      </ul>
+    </div>
+
+    <div class="alg-card">
+      <h4>Cuidados pós-trombólise IAM</h4>
+      <ul class="list">
+        <li>Monitorização cardíaca e pressórica contínua.</li>
+        <li>Não realizar punção venosa central ou arterial nas primeiras 24 horas, salvo necessidade extrema.</li>
+        <li>Evitar sondagem vesical nos primeiros 30 minutos após término da infusão.</li>
+        <li>Não passar SNE nas primeiras 24 horas após término da infusão.</li>
+        <li>ECG seriado em 30, 60 e 90 minutos para avaliar reperfusão.</li>
+        <li>Se sem reperfusão: ATC de resgate até 90 minutos, conforme fluxo local.</li>
+        <li>Se reperfusão: CATE em até 24 horas conforme estratégia fármaco-invasiva.</li>
       </ul>
     </div>
   </div>
 </section>
 
+<section id="avc" class="section">
+  <div class="card">
+    <h3>Trombólise — AVC isquêmico</h3>
+
+    <div class="alert">
+      <strong>Janela usual:</strong> até 4h30min do início dos sintomas ou último momento visto bem em paciente elegível. Exige TC de crânio sem sangramento, avaliação clínica, NIHSS, PA e glicemia adequadas/corrigidas.
+    </div>
+
+    <div class="grid">
+      <div>
+        <label>Peso, em kg</label>
+        <input id="avcPeso" type="number" step="0.1" placeholder="Ex.: 70">
+      </div>
+      <div>
+        <label>NIHSS</label>
+        <input id="avcNihss" type="number" step="1" placeholder="Ex.: 8">
+      </div>
+    </div>
+
+    <button class="btn primary" onclick="calcularAVC()">Calcular alteplase AVC</button>
+    <div id="resultadoAVC"></div>
+
+    <div class="alg-card">
+      <h4>Fluxo de atendimento</h4>
+      <ul class="list">
+        <li>Confirmar horário de início dos sintomas ou último momento visto bem.</li>
+        <li>Acionar equipe/fluxo AVC.</li>
+        <li>Solicitar TC de crânio sem contraste.</li>
+        <li>Coletar hemograma, plaquetas, TP, TTPa, glicemia, Na, K e creatinina conforme protocolo, sem atrasar conduta se elegível.</li>
+        <li>Checar PA, FC, FR, HGT, ECG e acesso venoso.</li>
+        <li>Tratar temperatura &gt;37,5°C, hipoxemia, hipoglicemia ou hiperglicemia relevante.</li>
+        <li>Aplicar escala NIHSS.</li>
+      </ul>
+    </div>
+
+    <div class="alg-card">
+      <h4>Contraindicações absolutas — AVCi</h4>
+      <ul class="list">
+        <li>Paciente com menos de 18 anos.</li>
+        <li>Sintomas de AVC há mais de 4h30min.</li>
+        <li>Glicemia &lt;50 ou &gt;400mg/dL antes de correção/tratamento.</li>
+        <li>PA sistólica &gt;180 ou diastólica &gt;105mmHg antes de correção/tratamento.</li>
+        <li>AVC muito leve (NIHSS &lt;4) ou muito grave (NIHSS &gt;25), individualizar conforme déficit incapacitante/protocolo.</li>
+        <li>AVC hemorrágico prévio.</li>
+        <li>Infarto agudo do miocárdio nos últimos 3 meses.</li>
+        <li>AVC isquêmico prévio ou traumatismo craniano grave nos últimos 3 meses.</li>
+        <li>Hemorragia TGI ou TGU ou cirurgia há menos de 14 dias.</li>
+        <li>Uso de heparina com TTPa &gt;2x limite superior da normalidade.</li>
+        <li>Uso de varfarina com RNI/INR &gt;1,7.</li>
+      </ul>
+    </div>
+
+    <div class="alg-card">
+      <h4>Contraindicações relativas / cautelas — AVCi</h4>
+      <ul class="list">
+        <li>Uso de anticoagulante oral direto sem teste específico disponível/adequado.</li>
+        <li>Suspeita clínica de dissecção de aorta, endocardite infecciosa ou sangramento ativo.</li>
+        <li>Convulsão no início do quadro com dúvida diagnóstica.</li>
+        <li>Grande área de hipodensidade precoce ou sinais extensos de infarto estabelecido.</li>
+        <li>Cirurgia recente, punção arterial não compressível ou procedimento invasivo recente.</li>
+        <li>Gestação/puerpério: decisão individualizada com neurologia/obstetrícia.</li>
+        <li>Plaquetopenia significativa ou coagulopatia suspeita.</li>
+      </ul>
+    </div>
+
+    <div class="alg-card">
+      <h4>Cuidados pós-trombólise AVCi</h4>
+      <ul class="list">
+        <li>Evitar antitrombóticos nas primeiras 24 horas.</li>
+        <li>Evitar cateterização arterial ou punção venosa profunda.</li>
+        <li>Evitar sonda vesical nos primeiros 30 minutos e SNE nas primeiras 24 horas.</li>
+        <li>Realizar imagem e exames de controle após 24 horas ou antes se piora neurológica.</li>
+        <li>Aferir PA a cada 15 minutos por 2h, a cada 30 minutos por 4h e a cada 1h por 18h.</li>
+        <li>Monitorar temperatura e glicemia a cada 4h.</li>
+        <li>Aplicar NIHSS seriado conforme protocolo.</li>
+        <li>Se piora do NIHSS: realizar TC de crânio imediatamente.</li>
+        <li>Na presença de sangramento: considerar plasma fresco congelado 2–3U ou crioprecipitado 6–8U e avaliação neurocirúrgica, conforme protocolo local.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <section id="vacinas" class="section">
   <div class="card">
@@ -3838,217 +3936,6 @@ const meds = [
     {nome:"Apresentações disponíveis no Brasil variam por fabricante — conferir bula/estoque local", fixo:0, tipo:"referência"}
   ],
   alertas:["Conferir apresentação disponível no Brasil, bula, dose por indicação, idade mínima, função renal/hepática e protocolo institucional.", "Atenção a sedação, efeito anticolinérgico nos de 1ª geração e ajuste renal/hepático quando aplicável."]
-},
-{
-  nome:"Adrenalina PCR",
-  classe:"Emergência cardiovascular",
-  dose:0.01,
-  unidade:"mg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:1,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"IV / IO",
-  apresentacoes:[
-    {nome:"Adrenalina 0,1 mg/mL", conc:0.1, tipo:"mL"}
-  ],
-  alertas:["PCR: usar concentração 0,1 mg/mL; repetir a cada 3–5 min conforme protocolo.", "Dupla checagem obrigatória."]
-},
-{
-  nome:"Adrenalina anafilaxia",
-  classe:"Emergência / anafilaxia",
-  dose:0.01,
-  unidade:"mg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:0.5,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"IM",
-  apresentacoes:[
-    {nome:"Adrenalina 1 mg/mL", conc:1, tipo:"mL"}
-  ],
-  alertas:["Anafilaxia: aplicar IM na face anterolateral da coxa.", "Até 11 anos, limitar usualmente a 0,3 mL; adulto até 0,5 mL."]
-},
-{
-  nome:"NaCl 3% bolus",
-  classe:"Eletrólito hipertônico",
-  dose:3,
-  unidade:"mL/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:150,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV",
-  apresentacoes:[
-    {nome:"NaCl 3%", conc:0, tipo:"mL"}
-  ],
-  alertas:["Hiponatremia sintomática/hipertensão intracraniana conforme protocolo.", "Monitorar sódio, osmolaridade e quadro neurológico."]
-},
-{
-  nome:"Glicose 10% hipoglicemia pediátrica",
-  classe:"Correção de hipoglicemia",
-  dose:2,
-  unidade:"mL/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:100,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV",
-  apresentacoes:[
-    {nome:"Solução glicosada 10%", conc:0, tipo:"mL"}
-  ],
-  alertas:["Hipoglicemia pediátrica: SG 10% 2 mL/kg EV.", "Reavaliar glicemia em 15 minutos e manter aporte contínuo conforme resposta."]
-},
-{
-  nome:"Glicose 50% adulto",
-  classe:"Correção de hipoglicemia",
-  dose:25,
-  unidade:"g dose usual",
-  intervalo:"Conforme indicação",
-  teto:25,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV",
-  apresentacoes:[
-    {nome:"Glicose 50% 25 g/50 mL", conc:0, tipo:"mL"}
-  ],
-  alertas:["Adulto: usar com cautela pelo risco de flebite/extravasamento.", "Reavaliar glicemia e manter aporte."]
-},
-{
-  nome:"Noradrenalina BIC",
-  classe:"Vasopressor",
-  dose:0.05,
-  unidade:"mcg/kg/min inicial",
-  intervalo:"Conforme indicação",
-  teto:2,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV contínuo",
-  apresentacoes:[
-    {nome:"Noradrenalina 1 mg/mL", conc:1, tipo:"mL"}
-  ],
-  alertas:["Titular por meta pressórica/perfusão.", "Preferir acesso central; monitorar extravasamento."]
-},
-{
-  nome:"Dobutamina BIC",
-  classe:"Inotrópico",
-  dose:5,
-  unidade:"mcg/kg/min inicial",
-  intervalo:"Conforme indicação",
-  teto:20,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV contínuo",
-  apresentacoes:[
-    {nome:"Dobutamina 12,5 mg/mL", conc:12.5, tipo:"mL"}
-  ],
-  alertas:["Titular conforme resposta hemodinâmica.", "Monitorar arritmias e hipotensão."]
-},
-{
-  nome:"Dopamina BIC",
-  classe:"Vasoativo / inotrópico",
-  dose:5,
-  unidade:"mcg/kg/min inicial",
-  intervalo:"Conforme indicação",
-  teto:20,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV contínuo",
-  apresentacoes:[
-    {nome:"Dopamina 5 mg/mL", conc:5, tipo:"mL"}
-  ],
-  alertas:["Uso em bomba de infusão.", "Risco de taquiarritmias e extravasamento."]
-},
-{
-  nome:"Sufentanil EV",
-  classe:"Opioide EV",
-  dose:0.1,
-  unidade:"mcg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:10,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV",
-  apresentacoes:[
-    {nome:"Sufentanil 5 mcg/mL", conc:5, tipo:"mL"},
-    {nome:"Sufentanil 50 mcg/mL", conc:50, tipo:"mL"}
-  ],
-  alertas:["Potente; uso anestésico/intensivo.", "Risco de depressão respiratória; via aérea e monitorização."]
-},
-{
-  nome:"Alfentanil EV",
-  classe:"Opioide EV",
-  dose:10,
-  unidade:"mcg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:1000,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV",
-  apresentacoes:[
-    {nome:"Alfentanil 0,5 mg/mL", conc:500, tipo:"mL"}
-  ],
-  alertas:["Uso anestésico/procedimental.", "Risco de depressão respiratória; monitorização."]
-},
-{
-  nome:"Remifentanil EV",
-  classe:"Opioide EV",
-  dose:0.05,
-  unidade:"mcg/kg/min inicial",
-  intervalo:"Conforme indicação",
-  teto:2,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV contínuo",
-  apresentacoes:[
-    {nome:"Remifentanil frasco 1 mg/2 mg/5 mg", fixo:1, tipo:"frasco"}
-  ],
-  alertas:["Uso em infusão contínua com monitorização e via aérea.", "Metabolismo ultracurto; preparar bomba."]
-},
-{
-  nome:"Tramadol EV",
-  classe:"Opioide EV/IM",
-  dose:1,
-  unidade:"mg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:100,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV / IM",
-  apresentacoes:[
-    {nome:"Tramadol 50 mg/mL", conc:50, tipo:"mL"}
-  ],
-  alertas:["Risco de náuseas, convulsões e síndrome serotoninérgica.", "Cautela com ISRS/IRSN/IMAO e epilepsia."]
-},
-{
-  nome:"Nalbufina EV",
-  classe:"Opioide agonista-antagonista",
-  dose:0.1,
-  unidade:"mg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:10,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV / IM / SC",
-  apresentacoes:[
-    {nome:"Nalbufina 10 mg/mL", conc:10, tipo:"mL"}
-  ],
-  alertas:["Pode precipitar abstinência em usuários de opioide agonista puro.", "Risco de sedação/depressão respiratória."]
-},
-{
-  nome:"Metadona EV",
-  classe:"Opioide EV/VO",
-  dose:0.05,
-  unidade:"mg/kg/dose",
-  intervalo:"Conforme indicação",
-  teto:10,
-  idadeMinMeses:0,
-  pesoMin:0,
-  vias:"EV / VO",
-  apresentacoes:[
-    {nome:"Metadona 10 mg/mL", conc:10, tipo:"mL"}
-  ],
-  alertas:["Conversão complexa e não linear; alto risco.", "Atenção a QT longo e acúmulo."]
 }];
 
 const emerg = {
@@ -4065,7 +3952,7 @@ const emerg = {
   rocuronio:{nome:"Rocurônio RSI", dose:1, unidade:"mg/kg", teto:100, conc:10, obs:"Bloqueador. Não sedativo."},
   fentanil_bolus:{nome:"Fentanil bolus", dose:1, unidade:"mcg/kg", teto:100, conc:50, obs:"Concentração 50 mcg/mL. Infundir lentamente."},
   nacl3:{nome:"NaCl 3%", dose:3, unidade:"mL/kg", teto:150, conc:null, obs:"Hiponatremia sintomática/hipertensão intracraniana conforme protocolo. Monitorar sódio."},
-  glicose10:{nome:"Glicose 10%", dose:2, unidade:"mL/kg", teto:100, conc:null, obs:"Hipoglicemia pediátrica: SG 10% 2 mL/kg EV, reavaliar glicemia em 15 minutos e manter aporte conforme resposta/protocolo."}
+  glicose10:{nome:"Glicose 10%", dose:5, unidade:"mL/kg", teto:250, conc:null, obs:"Hipoglicemia pediátrica. Rechecar glicemia."}
 };
 
 const opioides = {
@@ -4073,19 +3960,14 @@ const opioides = {
   morfina_ev:{nome:"Morfina EV", fator:3, unidade:"mg/dia"},
   oxicodona_vo:{nome:"Oxicodona VO", fator:1.5, unidade:"mg/dia"},
   hidromorfona_vo:{nome:"Hidromorfona VO", fator:4, unidade:"mg/dia"},
-  metadona_vo:{nome:"Metadona VO", fator:3, unidade:"mg/dia", alerta:"Conversão com metadona é não linear e de alto risco; usar tabela específica por MME e especialista."},
-  metadona_ev:{nome:"Metadona EV", fator:6, unidade:"mg/dia", alerta:"Conversão de metadona EV é de alto risco e deve ser individualizada."},
+  metadona_vo:{nome:"Metadona VO", fator:3, unidade:"mg/dia", alerta:"Conversão com metadona é não linear e de alto risco. Usar apenas como estimativa inicial e preferir cálculo específico por faixa de MME."},
   tramadol_vo:{nome:"Tramadol VO", fator:0.1, unidade:"mg/dia"},
-  tramadol_ev:{nome:"Tramadol EV", fator:0.1, unidade:"mg/dia"},
   codeina_vo:{nome:"Codeína VO", fator:0.15, unidade:"mg/dia"},
   tapentadol_vo:{nome:"Tapentadol VO", fator:0.4, unidade:"mg/dia"},
-  buprenorfina_sl:{nome:"Buprenorfina SL", fator:30, unidade:"mg/dia", alerta:"Conversão aproximada; pode limitar efeito de opioides agonistas plenos."},
+  buprenorfina_sl:{nome:"Buprenorfina SL", fator:30, unidade:"mg/dia", alerta:"Conversão aproximada; formulações e indicações variam. Conferir bula e contexto."},
   buprenorfina_td:{nome:"Buprenorfina transdérmica", fator:1.8, unidade:"mcg/h", alerta:"Conversão aproximada por adesivo; titulação lenta."},
   fentanil_transdermico:{nome:"Fentanil transdérmico", fator:2.4, unidade:"mcg/h"},
   fentanil_ev:{nome:"Fentanil EV", fator:0.3, unidade:"mcg/dia", alerta:"Conversão parenteral contínua; exige monitorização e contexto hospitalar."},
-  sufentanil_ev:{nome:"Sufentanil EV", fator:3, unidade:"mcg/dia", alerta:"Muito potente; conversão aproximada e uso anestésico/intensivo."},
-  alfentanil_ev:{nome:"Alfentanil EV", fator:0.03, unidade:"mcg/dia", alerta:"Uso anestésico/procedimental; conversão aproximada."},
-  remifentanil_ev:{nome:"Remifentanil EV", fator:0, unidade:"mcg/kg/min", alerta:"Não recomendado para conversão equianalgésica diária; ultracurto e titulado em bomba."},
   nalbufina_ev:{nome:"Nalbufina EV/IM/SC", fator:1, unidade:"mg/dia", alerta:"Agonista-antagonista; pode precipitar abstinência em dependência de opioide puro."},
   petidina_ev:{nome:"Petidina/Meperidina EV/IM", fator:0.1, unidade:"mg/dia", alerta:"Evitar uso rotineiro; metabólito neurotóxico, maior risco em DRC e idosos."}
 };
@@ -4575,11 +4457,6 @@ function calcularOpioide(){
     return;
   }
 
-  if(origem.fator === 0 || destino.fator === 0){
-    out.innerHTML = `<div class="alert">Remifentanil EV não deve ser convertido por equivalência diária simples. É ultracurto e titulado em mcg/kg/min com monitorização anestésica/intensiva.</div>`;
-    return;
-  }
-
   let mme = dose * origem.fator;
   let destinoDose = mme / destino.fator;
   let ajustada = destinoDose * (1-red);
@@ -4759,6 +4636,129 @@ function calcularRaiva(){
     </div>`;
 }
 
+function filtrarMedicamentos(){
+  const q = normalizar(document.getElementById("buscaMedicamento").value || "");
+  const sel = document.getElementById("medicamento");
+  let primeiro = null;
+
+  Array.from(sel.children).forEach(group=>{
+    if(group.tagName !== "OPTGROUP") return;
+    let algum = false;
+    Array.from(group.children).forEach(opt=>{
+      const m = meds[parseInt(opt.value)];
+      const texto = normalizar([opt.textContent, m?.nome, m?.classe, ...(m?.alertas || [])].join(" "));
+      const mostrar = !q || texto.includes(q);
+      opt.hidden = !mostrar;
+      if(mostrar){
+        algum = true;
+        if(primeiro === null) primeiro = opt;
+      }
+    });
+    group.hidden = !algum;
+  });
+
+  if(primeiro) sel.value = primeiro.value;
+}
+
+function calcularIAM(){
+  const p = parseFloat(document.getElementById("iamPeso").value || 0);
+  const tempo = document.getElementById("iamTempo").value;
+  const lytic = document.getElementById("iamLytic").value;
+  const out = document.getElementById("resultadoIAM");
+
+  if(!p || p <= 0){
+    out.innerHTML = `<div class="alert">Informe um peso válido.</div>`;
+    return;
+  }
+
+  if(tempo === "mais12"){
+    out.innerHTML = `<div class="alert"><strong>Atenção:</strong> mais de 12h de sintomas. Trombólise farmacológica geralmente não é rotina; individualizar conforme dor persistente, instabilidade, isquemia em curso e orientação cardiologia/hemodinâmica.</div>`;
+    return;
+  }
+
+  if(lytic === "tenecteplase"){
+    let mg, units, ml;
+    if(p < 60){ mg=30; units=6000; ml=6; }
+    else if(p < 70){ mg=35; units=7000; ml=7; }
+    else if(p < 80){ mg=40; units=8000; ml=8; }
+    else if(p < 90){ mg=45; units=9000; ml=9; }
+    else { mg=50; units=10000; ml=10; }
+
+    out.innerHTML = `<div class="result"><h4>Tenecteplase IAM</h4><div class="dose-box">
+      <strong>Peso:</strong> ${p.toFixed(1)} kg<br>
+      <strong>Dose:</strong> ${mg} mg (${units} U)<br>
+      <strong>Volume reconstituído:</strong> ${ml} mL<br>
+      <strong>Administração:</strong> bolus EV único.<br><br>
+      <strong>Enoxaparina fase aguda:</strong> 30mg EV bolus + 1mg/kg SC = ${p.toFixed(1)} mg SC, salvo ajuste por idade/renal/protocolo.
+    </div></div>`;
+    return;
+  }
+
+  if(tempo === "ate6"){
+    const bolus = 15;
+    let inf30 = Math.min(0.75 * p, 50);
+    let inf60 = Math.min(0.50 * p, 35);
+    let total = bolus + inf30 + inf60;
+    if(total > 100){ total = 100; inf30 = 50; inf60 = 35; }
+
+    out.innerHTML = `<div class="result"><h4>Alteplase IAM — regime acelerado 90 minutos</h4><div class="dose-box">
+      <strong>Tempo:</strong> até 6h dos sintomas<br>
+      <strong>Peso:</strong> ${p.toFixed(1)} kg<br>
+      <strong>Bolus:</strong> ${bolus.toFixed(1)} mg EV<br>
+      <strong>30 minutos:</strong> ${inf30.toFixed(1)} mg EV<br>
+      <strong>60 minutos seguintes:</strong> ${inf60.toFixed(1)} mg EV<br>
+      <strong>Dose total calculada:</strong> ${total.toFixed(1)} mg (máx 100mg)<br><br>
+      <strong>Enoxaparina fase aguda:</strong> 30mg EV bolus + 1mg/kg SC = ${p.toFixed(1)} mg SC, salvo ajuste por idade/renal/protocolo.
+    </div></div>`;
+    return;
+  }
+
+  const bolus = 10;
+  let total = Math.min(1.5 * p, 100);
+  let restante = Math.max(total - bolus, 0);
+  let primeiraHora, duasHoras;
+  if(p >= 65){ total = 100; primeiraHora = 50; duasHoras = 40; }
+  else { primeiraHora = restante * (50/90); duasHoras = restante * (40/90); }
+
+  out.innerHTML = `<div class="result"><h4>Alteplase IAM — regime convencional 3 horas</h4><div class="dose-box">
+    <strong>Tempo:</strong> 6 a 12h dos sintomas<br>
+    <strong>Peso:</strong> ${p.toFixed(1)} kg<br>
+    <strong>Dose total calculada:</strong> ${total.toFixed(1)} mg (máx 100mg)<br>
+    <strong>Bolus:</strong> ${bolus.toFixed(1)} mg EV<br>
+    <strong>Primeira hora:</strong> ${primeiraHora.toFixed(1)} mg EV<br>
+    <strong>Duas horas seguintes:</strong> ${duasHoras.toFixed(1)} mg EV<br>
+    <strong>Soma calculada:</strong> ${(bolus + primeiraHora + duasHoras).toFixed(1)} mg<br><br>
+    <strong>Enoxaparina fase aguda:</strong> 30mg EV bolus + 1mg/kg SC = ${p.toFixed(1)} mg SC, salvo ajuste por idade/renal/protocolo.
+  </div></div>`;
+}
+
+function calcularAVC(){
+  const p = parseFloat(document.getElementById("avcPeso").value || 0);
+  const nihss = parseFloat(document.getElementById("avcNihss").value || "");
+  const out = document.getElementById("resultadoAVC");
+
+  if(!p || p <= 0){
+    out.innerHTML = `<div class="alert">Informe um peso válido.</div>`;
+    return;
+  }
+
+  const total = Math.min(0.9 * p, 90);
+  const bolus = total * 0.10;
+  const infusion = total * 0.90;
+  let aviso = "";
+  if(!isNaN(nihss)){
+    if(nihss < 4) aviso = `<div class="alert"><strong>Atenção:</strong> NIHSS &lt;4: avaliar se déficit é incapacitante; individualizar conforme protocolo.</div>`;
+    if(nihss > 25) aviso = `<div class="alert"><strong>Atenção:</strong> NIHSS &gt;25: alto risco; conferir protocolo/neurologia.</div>`;
+  }
+
+  out.innerHTML = `<div class="result"><h4>Alteplase AVCi</h4><div class="dose-box">
+    <strong>Peso:</strong> ${p.toFixed(1)} kg<br>
+    <strong>Dose total:</strong> ${total.toFixed(1)} mg (0,9mg/kg; máximo 90mg)<br>
+    <strong>Bolus 10%:</strong> ${bolus.toFixed(1)} mg EV<br>
+    <strong>Infusão em 60min 90%:</strong> ${infusion.toFixed(1)} mg EV
+  </div>${aviso}</div>`;
+}
+
 function acceptTerms(){
   document.getElementById("termsModal").style.display="none";
 }
@@ -4775,8 +4775,17 @@ function denyTerms(){
 
 window.onload = function(){
   init();
+  if(typeof filtrarMedicamentos === "function") filtrarMedicamentos();
   document.getElementById("termsModal").style.display="flex";
 };
+
+
+
+
+
+
+
+buildDoseOptions();
 </script>
 
 </body>
