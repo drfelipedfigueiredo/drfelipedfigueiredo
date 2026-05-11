@@ -20,9 +20,7 @@
 --whatsapp:#25D366;
 }
 
-*{
-box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
 margin:0;
@@ -82,9 +80,7 @@ font-family:Montserrat,sans-serif;
 cursor:pointer;
 }
 
-button:hover{
-opacity:.92;
-}
+button:hover{ opacity:.92; }
 
 .whatsapp{
 background:var(--verde);
@@ -186,7 +182,6 @@ line-height:1.5;
 }
 
 /* MODAL DE TERMOS */
-
 .modal-overlay{
 position:fixed;
 inset:0;
@@ -254,24 +249,13 @@ cursor:pointer;
 }
 
 @keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(8px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{ opacity:0; transform:translateY(8px); }
+to{ opacity:1; transform:translateY(0); }
 }
 
 @media(max-width:520px){
-.row{
-flex-direction:column;
-}
-
-.modal-actions{
-flex-direction:column;
-}
+.row{ flex-direction:column; }
+.modal-actions{ flex-direction:column; }
 }
 </style>
 </head>
@@ -279,7 +263,6 @@ flex-direction:column;
 <body>
 
 <div id="modal-termos" class="modal-overlay">
-
 <div class="modal-box">
 
 <h2>Termo de Uso</h2>
@@ -294,19 +277,11 @@ Ao continuar, você declara ciência de que esta ferramenta não estabelece rela
 </div>
 
 <div class="modal-actions">
-
-<button class="btn-aceitar" onclick="aceitarTermos()">
-Aceitar e continuar
-</button>
-
-<button class="btn-negar" onclick="negarTermos()">
-Negar e fechar
-</button>
-
+<button class="btn-aceitar" onclick="aceitarTermos()">Aceitar e continuar</button>
+<button class="btn-negar" onclick="negarTermos()">Negar e fechar</button>
 </div>
 
 </div>
-
 </div>
 
 <div class="container">
@@ -318,16 +293,13 @@ Calculadora educativa de doses pediátricas
 </div>
 
 <div class="row">
-
 <input type="number" id="peso" placeholder="Peso (kg)" step="0.1">
-
 <input type="number" id="idade" placeholder="Idade" step="1">
 
 <select id="tipoIdade">
 <option value="anos">anos</option>
 <option value="meses">meses</option>
 </select>
-
 </div>
 
 <select id="med">
@@ -338,11 +310,10 @@ Calculadora educativa de doses pediátricas
 <option value="hedera">Hedera helix</option>
 <option value="desloratadina">Desloratadina</option>
 <option value="simeticona">Simeticona</option>
+<option value="ondansetrona">Ondansetrona</option>
 </select>
 
-<button onclick="calc()">
-Calcular
-</button>
+<button onclick="calc()">Calcular</button>
 
 <div id="res"></div>
 
@@ -383,7 +354,6 @@ Cruzeiro/SP
 </div>
 
 <script>
-
 function aceitarTermos(){
 document.getElementById("modal-termos").style.display="none";
 document.body.style.overflow="auto";
@@ -455,7 +425,6 @@ let idadeMeses=idade?(tipo==="anos"?idade*12:idade):null;
 let html="";
 
 /* DIPIRONA */
-
 if(med==="dipirona"){
 
 if(idadeMeses!==null && idadeMeses<3){
@@ -518,7 +487,6 @@ Dose VO pediátrica: 10 a 15 mg/kg/dose até 4x/dia.
 }
 
 /* PARACETAMOL */
-
 if(med==="paracetamol"){
 
 let doseMin=peso*10;
@@ -561,7 +529,6 @@ Dose VO pediátrica: 10 a 15 mg/kg/dose a cada 4-6h.
 }
 
 /* IBUPROFENO */
-
 if(med==="ibuprofeno"){
 
 if(idadeMeses!==null && idadeMeses<6){
@@ -601,7 +568,6 @@ Dose pediátrica: 5 a 10 mg/kg/dose até 4x/dia.
 }
 
 /* HEDERA HELIX */
-
 if(med==="hedera"){
 
 if(idadeAnos===null){
@@ -644,7 +610,6 @@ Apresentação: 15 mg/mL.
 }
 
 /* DESLORATADINA */
-
 if(med==="desloratadina"){
 
 if(idadeMeses===null){
@@ -691,7 +656,6 @@ Apresentação: 0,5 mg/mL.
 }
 
 /* SIMETICONA */
-
 if(med==="simeticona"){
 
 let gotas=Math.min(Math.round(peso),20);
@@ -706,6 +670,65 @@ html+=`
 <div class="card-title">Simeticona 75 mg/mL</div>
 <div class="card-dose">${gotas} gotas</div>
 <div class="card-small">1 gota ≈ 3 mg</div>
+</div>
+`;
+}
+
+/* ONDANSETRONA */
+if(med==="ondansetrona"){
+
+if(idadeMeses===null){
+erro("Informe a idade.");
+return;
+}
+
+if(idadeMeses<6){
+erro("Ondansetrona: não recomendada em menores de 6 meses sem avaliação médica.");
+return;
+}
+
+if(peso<8){
+erro("Ondansetrona: abaixo de 8 kg, utilizar somente após avaliação médica.");
+return;
+}
+
+let doseMg=0;
+
+if(peso>=8 && peso<=15){
+doseMg=2;
+}
+else if(peso>15 && peso<=30){
+doseMg=4;
+}
+else if(peso>30){
+doseMg=8;
+}
+
+let mlSol=doseMg/0.8;
+let mlGotas=doseMg/8;
+let gotas=Math.round(mlGotas*20);
+
+html+=`
+<div class="info">
+<strong>Ondansetrona</strong><br>
+Antiemético. Uso pediátrico descrito a partir de 6 meses em algumas diretrizes, geralmente como dose única para vômitos persistentes e apoio à reidratação oral.
+</div>
+
+<div class="card">
+<div class="card-title">Ondansetrona 4 mg/5 mL — solução oral</div>
+<div class="card-dose">${arredondar(mlSol,1)} mL</div>
+<div class="card-small">Equivalente a ${doseMg} mg. Uso somente sob orientação médica.</div>
+</div>
+
+<div class="card">
+<div class="card-title">Ondansetrona 8 mg/mL — gotas</div>
+<div class="card-dose">${gotas} gotas</div>
+<div class="card-small">${arredondar(mlGotas,2)} mL = ${doseMg} mg. Estimado 20 gotas/mL; pode variar conforme fabricante.</div>
+</div>
+
+<div class="card">
+<div class="card-title">Orientação de uso</div>
+<div class="card-small">Preferencialmente dose única quando indicada. Não utilizar de forma repetida sem orientação médica.</div>
 </div>
 `;
 }
@@ -731,7 +754,6 @@ window.open(
 );
 
 }
-
 </script>
 
 </body>
